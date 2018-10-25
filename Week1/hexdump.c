@@ -4,18 +4,21 @@
 //This does not close the file
 void hexdump(FILE *output, char *buffer, int length)
 {
+    //Print the output line by line
     int offset = 0;
     while (offset < length)
     {
         //print the offset
-        fprintf(output, "%08X : ", offset);
+        fprintf(output, "%06X : ", offset);
         //Hex dump part
         for (int i = 0; i < 16; i++)
         {
             int pos = offset + i;
             if (pos < length)
             {
-                fprintf(output, "%02x ", buffer[pos]);
+                //%x expects an int, but we give in a char, so in debian it will be casted to
+                //int but because of sign extension, the result is wrong (output 0xff...), we need to cast it like this
+                fprintf(output, "%02x ", (unsigned)(unsigned char)buffer[pos]);
             }
             else
             {
