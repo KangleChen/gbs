@@ -88,4 +88,3 @@ void list_print(list_t *list, void (*print_elem)(char *)) {
         curr = curr->next;
     }
 }
-
