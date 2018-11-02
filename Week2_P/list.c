@@ -5,7 +5,8 @@
 #include "list.h"
 
 list_t *list_init() {
-    list_t *list = malloc(sizeof(list_t));
+
+    list_t *list = calloc(1, sizeof(list_t));
 
     return list;
 }
@@ -46,72 +47,45 @@ struct list_elem *list_append(list_t *list, char *data) {
     return list_elem1;
 }
 
-int list_remove(list_t *list, struct list_elem *elem){
-    struct list_elem *prev_list_elem = NULL;
-    struct list_elem *current_list_elem = list->first;
-    while(current_list_elem != elem){
-        prev_list_elem = current_list_elem;
-        current_list_elem = current_list_elem->next;
+int list_remove(list_t *list, struct list_elem *elem) {
+    for (struct list_elem *prev = NULL, *curr = list->first; curr; prev = curr, curr = curr->next) {
+        if (curr == elem) {
+            if (curr == list->first) {
+                list->first = curr->next;
+            } else {
+                prev->next = curr->next;
+            }
+            if (curr == list->last) {
+                list->last = prev;
+            }
+            free(curr);
+            return 0;
+        }
     }
-
-    if(current_list_elem == NULL){
-        return -1;
-    }
-
-    if(prev_list_elem != NULL){
-        prev_list_elem->next = current_list_elem->next;
-    } else {
-        list->first = current_list_elem->next;
-    }
-
-    if(current_list_elem->next == NULL){
-        list->last = prev_list_elem;
-    }
-
-    free(current_list_elem);
-
-    return 0;
-
+    return -1;
 }
 
-void list_finit(list_t *list){
-    while(list->first != NULL){
+void list_finit(list_t *list) {
+    while (list->first != NULL) {
         list_remove(list, list->last);
     }
     free(list);
 }
 
-struct list_elem *list_find(list_t *list, char *data, int (*cmp_elem)(const char *, const char *)){
+struct list_elem *list_find(list_t *list, char *data, int (*cmp_elem)(const char *, const char *)) {
     struct list_elem *current_list_elem = list->first;
-    while(current_list_elem != NULL && (*cmp_elem)(current_list_elem->data, data)!=0){
+    while (current_list_elem != NULL && (*cmp_elem)(current_list_elem->data, data) != 0) {
         current_list_elem = current_list_elem->next;
     }
     return current_list_elem;
 }
 
-int numPlaces (int n) {
-    if (n < 0) n = (n == INT_MIN) ? INT_MAX : -n;
-    if (n < 10) return 1;
-    if (n < 100) return 2;
-    if (n < 1000) return 3;
-    if (n < 10000) return 4;
-    if (n < 100000) return 5;
-    if (n < 1000000) return 6;
-    if (n < 10000000) return 7;
-    if (n < 100000000) return 8;
-    if (n < 1000000000) return 9;
-    return 10;
-}
-
-void list_print(list_t *list, void (*print_elem)(char *)){
-    int i = 1;
-    struct list_elem *current_list_elem = list->first;
-    while(current_list_elem != NULL){
-        char *out_str = malloc(strlen(current_list_elem->data)+numPlaces(i)+2);
-        sprintf(out_str, "%d:%s", i, current_list_elem->data);
-        (*print_elem)(out_str);
-        current_list_elem = current_list_elem->next;
-        i++;
+void list_print(list_t *list, void (*print_elem)(char *)) {
+    struct list_elem *curr = list->first;
+    for (int i = 1; curr != NULL; i++) {
+        printf("%d:", i);
+        (*print_elem)(curr->data);
+        curr = curr->next;
     }
 }
 
