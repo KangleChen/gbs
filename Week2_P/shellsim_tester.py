@@ -3,7 +3,7 @@
 # Decompiled from: Python 2.7.13 (default, Sep 26 2018, 18:42:22) 
 # [GCC 6.3.0 20170516]
 # Embedded file name: shellsim_tester.py
-# Compiled at: 2018-10-29 09:59:19
+# Compiled at: 2018-11-01 20:07:37
 import os
 from subprocess import Popen, PIPE
 TOTAL_POINTS = 3
@@ -24,9 +24,7 @@ def main():
     else:
         print 'Test FAILED: wrong commands used'
     p = Popen(CMD, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    print('Opened')
     stdout, stderr = p.communicate('ls\nexit\n')
-    print('Communicated')
     if os.path.basename(SRC) in stdout:
         print 'Test PASSED: ls command contains shellsim.c'
         points += 2
