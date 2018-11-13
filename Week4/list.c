@@ -58,7 +58,8 @@ int list_remove(list_t *list, struct list_elem *elem) {
             if (curr == list->last) {
                 list->last = prev;
             }
-            free(curr);
+            //TODO prevent memory zombies
+            //free(curr);
             return 0;
         }
     }

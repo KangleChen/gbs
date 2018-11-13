@@ -21,8 +21,51 @@ typedef struct threadInfo {
     int tFullTime;
 } threadInfo_t;
 
-struct list_elem *getNextThread(list_t *list) {
+struct list_elem *getNextThread(list_t *list, struct list_elem *currT, int algo) {
+    if (algo == ROUND_ROBIN) {
+        if (currT == NULL || currT->next == NULL) {
+            return list->first;
+        }
+        return currT->next;
+    } else if (algo == PRIORITY_ROUND_ROBIN) {
+        return NULL;
+    } else if (algo == SHORTEST_REMAINING_TIME_NEXT) {
+        return NULL;
+    } else {
+        return NULL;
+    }
+}
 
+int readyThreads(int time, list_t *waiting, list_t *ready) {
+    int n = 0;
+    for (struct list_elem *curr = waiting->first; curr != NULL; curr = curr->next) {
+        threadInfo_t *cThreadInfo = ((threadInfo_t *) curr->data);
+        if (cThreadInfo->tStart <= time) {
+            list_remove(waiting, curr);
+            list_append(ready, cThreadInfo);
+            n++;
+            //printf("Starting thread %d\n", cThreadInfo->tNum);
+        }
+    }
+    return n;
+}
+
+void print_time_step(int time, int thread_num) {
+    static int first_time = 1;
+    int i;
+
+    if (first_time) {
+        printf("  Time |  1  2  3  4  5  6  7  8  9  10\n");
+        printf("-------+--------------------------------\n");
+        first_time = 0;
+    }
+    printf("%06d |", time);
+    if (thread_num) {
+        for (i = 1; i < thread_num; i++)
+            printf("   ");
+        printf("  %d\n", thread_num);
+    } else
+        printf("\n");
 }
 
 int main(int argc, char *argv[], char *envp[]) {
@@ -47,21 +90,17 @@ int main(int argc, char *argv[], char *envp[]) {
             case 'q':
                 timeQVal = atoi(optarg);
                 break;
-            case 'q':
-                switch (optarg) {
-                    case "RR":
-                        algoVal = ROUND_ROBIN;
-                        break;
-                    case "PRR":
-                        algoVal = PRIORITY_ROUND_ROBIN;
-                        break;
-                    case "SRTN":
-                        algoVal = SHORTEST_REMAINING_TIME_NEXT;
-                        break;
-                    default:
-                        fprintf(stderr,
-                                "Possible algorithms: \n\tRound-Robin (\"RR\")\n\tPriority Round-Robin (\"PRR\")\n\tShortest Remaining Time Next(\"SRTN\")\n");
-                        abort();
+            case 'a':
+                if (strcmp(optarg, "RR") == 0) {
+                    algoVal = ROUND_ROBIN;
+                } else if (strcmp(optarg, "PRR") == 0) {
+                    algoVal = PRIORITY_ROUND_ROBIN;
+                } else if (strcmp(optarg, "SRTN") == 0) {
+                    algoVal = SHORTEST_REMAINING_TIME_NEXT;
+                } else {
+                    fprintf(stderr,
+                            "Possible algorithms: \n\tRound-Robin (\"RR\")\n\tPriority Round-Robin (\"PRR\")\n\tShortest Remaining Time Next(\"SRTN\")\n");
+                    abort();
                 }
                 break;
             case '?':
@@ -84,17 +123,20 @@ int main(int argc, char *argv[], char *envp[]) {
         abort();
     }
 
-    list_t *list1 = list_init();
+    list_t *ready = list_init();
+    list_t *waiting = list_init();
+
 
     threadInfo_t *threadInfo;
 
-    for (int j = 0; j < nVal; ++j) {
+    for (int j = 1; j <= nVal; ++j) {
         threadInfo = malloc(sizeof(threadInfo_t));
 
         int prio;
         int start;
         int runTime;
-        scanf("%d %d %d\n", &prio, &start, &runTime);
+        scanf("%d %d %d", &prio, &start, &runTime);
+        //printf("%d %d %d\n", prio, start, runTime);
 
         threadInfo->tNum = j;
         threadInfo->tPrio = prio;
@@ -102,19 +144,42 @@ int main(int argc, char *argv[], char *envp[]) {
         threadInfo->tRunTime = 0;
         threadInfo->tFullTime = runTime;
 
-        list_append(list1, threadInfo);
+        list_append(waiting, threadInfo);
 
     }
 
-    struct list_elem *elem;
+    struct list_elem *elem = NULL;
     threadInfo_t *cTInfo;
-    while (list1->first != NULL) {
-        elem = getNextThread(list1);
-        cTInfo = elem->data;
-        if (cTInfo->tRunTime >= cTInfo->tFullTime) {
-            list_remove(list1, elem);
+    int thread_num = 0;
+
+    int time = 0;
+
+    while (ready->first != NULL || waiting->first != NULL) {
+
+        readyThreads(time, waiting, ready);
+
+        thread_num = 0;
+        elem = getNextThread(ready, elem, algoVal);
+
+        if (elem != NULL) {
+            cTInfo = elem->data;
+            thread_num = cTInfo->tNum;
         }
+
+        for (int i = 0; i < timeQVal; i += timeStepVal) {
+            print_time_step(time, thread_num);
+            if (thread_num) {
+                cTInfo->tRunTime += timeStepVal;
+            }
+            time += timeStepVal;
+        }
+
+        if (thread_num && cTInfo->tRunTime >= cTInfo->tFullTime) {
+            list_remove(ready, elem);
+        }
+
     }
 
-    list_finit(list1);
+    list_finit(ready);
+    list_finit(waiting);
 }
