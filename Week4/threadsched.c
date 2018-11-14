@@ -148,7 +148,8 @@ int main(int argc, char *argv[], char *envp[]) {
 
     }
 
-    struct list_elem *elem = NULL;
+    struct list_elem *lastElem = NULL;
+    struct list_elem *elem = getNextThread(ready, NULL, algoVal);
     threadInfo_t *cTInfo;
     int thread_num = 0;
 
@@ -159,7 +160,6 @@ int main(int argc, char *argv[], char *envp[]) {
         readyThreads(time, waiting, ready);
 
         thread_num = 0;
-        elem = getNextThread(ready, elem, algoVal);
 
         if (elem != NULL) {
             cTInfo = elem->data;
@@ -174,8 +174,10 @@ int main(int argc, char *argv[], char *envp[]) {
             time += timeStepVal;
         }
 
+        lastElem = elem;
+        elem = getNextThread(ready, elem, algoVal);
         if (thread_num && cTInfo->tRunTime >= cTInfo->tFullTime) {
-            list_remove(ready, elem);
+            list_remove(ready, lastElem);
         }
 
     }
