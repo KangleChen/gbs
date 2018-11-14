@@ -7,7 +7,7 @@
 from __future__ import print_function
 import subprocess as sp, operator as op
 
-DEBUG = False
+DEBUG = True
 TIP = True
 TOTAL_POINTS = 7
 POINTS = 0
@@ -16,39 +16,39 @@ FAILED = 'Test FAILED: {}'
 DATEFORMAT = '%a %b %d %H:%M:%S %Y'
 PROG_NAME = './threadsched'
 TESTS = [
-    {'name': 'sample RR', 'n': 3,
-     't': 10, 'q': 50, 'a': 'RR', 'threads': [{'prio': 1, 'id': 1, 'start': 100, 'rest_time': 200},
-                                              {'prio': 1, 'id': 2, 'start': 200, 'rest_time': 200},
-                                              {'prio': 1, 'id': 3, 'start': 300, 'rest_time': 200}], 'pts': 0.5},
-    {'name': 'sample PRR', 'n': 4,
-     't': 10, 'q': 50, 'a': 'PRR', 'threads': [{'prio': 1, 'id': 1, 'start': 50, 'rest_time': 200},
-                                               {'prio': 1, 'id': 2, 'start': 100, 'rest_time': 200},
-                                               {'prio': 2, 'id': 3, 'start': 150, 'rest_time': 200},
-                                               {'prio': 1, 'id': 4, 'start': 200, 'rest_time': 200}], 'pts': 0.5},
-    {'name': 'sample SRTN', 'n': 3,
-     't': 10, 'q': 50, 'a': 'SRTN', 'threads': [{'prio': 1, 'id': 1, 'start': 100, 'rest_time': 300},
-                                                {'prio': 1, 'id': 2, 'start': 150, 'rest_time': 200},
-                                                {'prio': 1, 'id': 3, 'start': 200, 'rest_time': 100}], 'pts': 0.5},
-    {'name': 'Value Range', 'n': 1,
-     't': 10, 'q': 50, 'a': 'SRTN', 'threads': [{'prio': 1, 'id': 1, 'start': 100000, 'rest_time': 30000}], 'pts': 0.5},
-    {'name': 'simple PRR case', 'n': 4,
-     't': 10, 'q': 20, 'a': 'PRR',
-     'threads': [{'prio': 3, 'id': 1, 'start': 0, 'rest_time': 50}, {'prio': 2, 'id': 2, 'start': 10, 'rest_time': 30},
-                 {'prio': 1, 'id': 3, 'start': 20, 'rest_time': 80},
-                 {'prio': 1, 'id': 4, 'start': 30, 'rest_time': 60}], 'pts': 1},
+    # {'name': 'sample RR', 'n': 3,
+    #  't': 10, 'q': 50, 'a': 'RR', 'threads': [{'prio': 1, 'id': 1, 'start': 100, 'rest_time': 200},
+    #                                           {'prio': 1, 'id': 2, 'start': 200, 'rest_time': 200},
+    #                                           {'prio': 1, 'id': 3, 'start': 300, 'rest_time': 200}], 'pts': 0.5},
+    # {'name': 'sample PRR', 'n': 4,
+    #  't': 10, 'q': 50, 'a': 'PRR', 'threads': [{'prio': 1, 'id': 1, 'start': 50, 'rest_time': 200},
+    #                                            {'prio': 1, 'id': 2, 'start': 100, 'rest_time': 200},
+    #                                            {'prio': 2, 'id': 3, 'start': 150, 'rest_time': 200},
+    #                                            {'prio': 1, 'id': 4, 'start': 200, 'rest_time': 200}], 'pts': 0.5},
+    # {'name': 'sample SRTN', 'n': 3,
+    #  't': 10, 'q': 50, 'a': 'SRTN', 'threads': [{'prio': 1, 'id': 1, 'start': 100, 'rest_time': 300},
+    #                                             {'prio': 1, 'id': 2, 'start': 150, 'rest_time': 200},
+    #                                             {'prio': 1, 'id': 3, 'start': 200, 'rest_time': 100}], 'pts': 0.5},
+    # {'name': 'Value Range', 'n': 1,
+    #  't': 10, 'q': 50, 'a': 'SRTN', 'threads': [{'prio': 1, 'id': 1, 'start': 100000, 'rest_time': 30000}], 'pts': 0.5},
+    # {'name': 'simple PRR case', 'n': 4,
+    #  't': 10, 'q': 20, 'a': 'PRR',
+    #  'threads': [{'prio': 3, 'id': 1, 'start': 0, 'rest_time': 50}, {'prio': 2, 'id': 2, 'start': 10, 'rest_time': 30},
+    #              {'prio': 1, 'id': 3, 'start': 20, 'rest_time': 80},
+    #              {'prio': 1, 'id': 4, 'start': 30, 'rest_time': 60}], 'pts': 1},
     {'name': 'simple RR case', 'n': 5,
-     't': 5, 'q': 15, 'a': 'PRR',
+     't': 5, 'q': 15, 'a': 'RR',
      'threads': [{'prio': 1, 'id': 1, 'start': 0, 'rest_time': 80}, {'prio': 1, 'id': 2, 'start': 10, 'rest_time': 20},
                  {'prio': 1, 'id': 3, 'start': 10, 'rest_time': 10}, {'prio': 1, 'id': 4, 'start': 80, 'rest_time': 20},
                  {'prio': 1, 'id': 5, 'start': 85, 'rest_time': 50}], 'pts': 1},
-    {'name': 'hard SRTN case', 'n': 10,
-     't': 5, 'q': 15, 'a': 'SRTN',
-     'threads': [{'prio': 1, 'id': 1, 'start': 9, 'rest_time': 9}, {'prio': 1, 'id': 2, 'start': 9, 'rest_time': 18},
-                 {'prio': 1, 'id': 3, 'start': 9, 'rest_time': 20}, {'prio': 1, 'id': 4, 'start': 9, 'rest_time': 60},
-                 {'prio': 1, 'id': 5, 'start': 25, 'rest_time': 10}, {'prio': 1, 'id': 6, 'start': 25, 'rest_time': 30},
-                 {'prio': 1, 'id': 7, 'start': 25, 'rest_time': 20}, {'prio': 1, 'id': 8, 'start': 36, 'rest_time': 30},
-                 {'prio': 1, 'id': 9, 'start': 36, 'rest_time': 40},
-                 {'prio': 1, 'id': 10, 'start': 36, 'rest_time': 50}], 'pts': 1},
+    # {'name': 'hard SRTN case', 'n': 10,
+    #  't': 5, 'q': 15, 'a': 'SRTN',
+    #  'threads': [{'prio': 1, 'id': 1, 'start': 9, 'rest_time': 9}, {'prio': 1, 'id': 2, 'start': 9, 'rest_time': 18},
+    #              {'prio': 1, 'id': 3, 'start': 9, 'rest_time': 20}, {'prio': 1, 'id': 4, 'start': 9, 'rest_time': 60},
+    #              {'prio': 1, 'id': 5, 'start': 25, 'rest_time': 10}, {'prio': 1, 'id': 6, 'start': 25, 'rest_time': 30},
+    #              {'prio': 1, 'id': 7, 'start': 25, 'rest_time': 20}, {'prio': 1, 'id': 8, 'start': 36, 'rest_time': 30},
+    #              {'prio': 1, 'id': 9, 'start': 36, 'rest_time': 40},
+    #              {'prio': 1, 'id': 10, 'start': 36, 'rest_time': 50}], 'pts': 1},
     {'name': 'hard RR case', 'n': 10,
      't': 10, 'q': 30, 'a': 'RR',
      'threads': [{'prio': 1, 'id': 1, 'start': 0, 'rest_time': 40}, {'prio': 1, 'id': 2, 'start': 30, 'rest_time': 50},
@@ -56,15 +56,16 @@ TESTS = [
                  {'prio': 1, 'id': 5, 'start': 40, 'rest_time': 10}, {'prio': 1, 'id': 6, 'start': 45, 'rest_time': 30},
                  {'prio': 1, 'id': 7, 'start': 55, 'rest_time': 20}, {'prio': 1, 'id': 8, 'start': 70, 'rest_time': 30},
                  {'prio': 1, 'id': 9, 'start': 120, 'rest_time': 40},
-                 {'prio': 1, 'id': 10, 'start': 300, 'rest_time': 50}], 'pts': 1},
-    {'name': 'hard PRR case', 'n': 10,
-     't': 10, 'q': 20, 'a': 'PRR',
-     'threads': [{'prio': 4, 'id': 1, 'start': 10, 'rest_time': 30}, {'prio': 4, 'id': 2, 'start': 10, 'rest_time': 40},
-                 {'prio': 4, 'id': 3, 'start': 10, 'rest_time': 20}, {'prio': 3, 'id': 4, 'start': 10, 'rest_time': 60},
-                 {'prio': 3, 'id': 5, 'start': 20, 'rest_time': 30}, {'prio': 3, 'id': 6, 'start': 20, 'rest_time': 30},
-                 {'prio': 2, 'id': 7, 'start': 20, 'rest_time': 20}, {'prio': 2, 'id': 8, 'start': 40, 'rest_time': 30},
-                 {'prio': 2, 'id': 9, 'start': 40, 'rest_time': 40},
-                 {'prio': 1, 'id': 10, 'start': 150, 'rest_time': 50}], 'pts': 1}]
+                 {'prio': 1, 'id': 10, 'start': 300, 'rest_time': 50}], 'pts': 1}  # ,
+    # {'name': 'hard PRR case', 'n': 10,
+    #  't': 10, 'q': 20, 'a': 'PRR',
+    #  'threads': [{'prio': 4, 'id': 1, 'start': 10, 'rest_time': 30}, {'prio': 4, 'id': 2, 'start': 10, 'rest_time': 40},
+    #              {'prio': 4, 'id': 3, 'start': 10, 'rest_time': 20}, {'prio': 3, 'id': 4, 'start': 10, 'rest_time': 60},
+    #              {'prio': 3, 'id': 5, 'start': 20, 'rest_time': 30}, {'prio': 3, 'id': 6, 'start': 20, 'rest_time': 30},
+    #              {'prio': 2, 'id': 7, 'start': 20, 'rest_time': 20}, {'prio': 2, 'id': 8, 'start': 40, 'rest_time': 30},
+    #              {'prio': 2, 'id': 9, 'start': 40, 'rest_time': 40},
+    #              {'prio': 1, 'id': 10, 'start': 150, 'rest_time': 50}], 'pts': 1}
+]
 
 
 def build_cmd(test):

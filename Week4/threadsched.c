@@ -22,11 +22,11 @@ typedef struct threadInfo {
 } threadInfo_t;
 
 struct list_elem *getNextThread(list_t *list, struct list_elem *currT, int algo) {
+    if (currT == NULL || currT->next == NULL) {
+        return list->first;
+    }
+    return currT->next;
     if (algo == ROUND_ROBIN) {
-        if (currT == NULL || currT->next == NULL) {
-            return list->first;
-        }
-        return currT->next;
     } else if (algo == PRIORITY_ROUND_ROBIN) {
         return NULL;
     } else if (algo == SHORTEST_REMAINING_TIME_NEXT) {
@@ -172,6 +172,9 @@ int main(int argc, char *argv[], char *envp[]) {
                 cTInfo->tRunTime += timeStepVal;
             }
             time += timeStepVal;
+            if (thread_num && cTInfo->tRunTime >= cTInfo->tFullTime) {
+                break;
+            }
         }
 
         lastElem = elem;
