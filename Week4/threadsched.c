@@ -168,12 +168,12 @@ int main(int argc, char *argv[], char *envp[]) {
 
         for (int i = 0; i < timeQVal; i += timeStepVal) {
             print_time_step(time, thread_num);
+            time += timeStepVal;
             if (thread_num) {
                 cTInfo->tRunTime += timeStepVal;
-            }
-            time += timeStepVal;
-            if (thread_num && cTInfo->tRunTime >= cTInfo->tFullTime) {
-                break;
+                if (cTInfo->tRunTime >= cTInfo->tFullTime) {
+                    break;
+                }
             }
         }
 
