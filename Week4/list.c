@@ -88,3 +88,12 @@ void list_print(list_t *list, void (*print_elem)(void *)) {
         curr = curr->next;
     }
 }
+
+
+void list_debug_print(list_t *list) {
+    printf("List: ");
+    for (struct list_elem *curr = list->first; curr != NULL; curr = curr->next) {
+        printf("%p->", curr->data);
+    }
+    printf("NULL\n");
+}

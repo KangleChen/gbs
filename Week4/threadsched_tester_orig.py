@@ -7,7 +7,7 @@
 from __future__ import print_function
 import subprocess as sp, operator as op
 
-DEBUG = True
+DEBUG = False
 TIP = True
 TOTAL_POINTS = 7
 POINTS = 0
@@ -39,8 +39,14 @@ TESTS = [
      'threads': [{'prio': 1, 'id': 1, 'start': 0, 'rest_time': 80}, {'prio': 1, 'id': 2, 'start': 10, 'rest_time': 20},
                  {'prio': 1, 'id': 3, 'start': 10, 'rest_time': 10}, {'prio': 1, 'id': 4, 'start': 80, 'rest_time': 20},
                  {'prio': 1, 'id': 5, 'start': 85, 'rest_time': 50}], 'pts': 1},
-    # {'name': 'hard SRTN case', 'n': 10,
-    #   't': 5, 'q': 15, 'a': 'SRTN', 'threads': [{'prio': 1, 'id': 1, 'start': 9, 'rest_time': 9}, {'prio': 1, 'id': 2, 'start': 9, 'rest_time': 18}, {'prio': 1, 'id': 3, 'start': 9, 'rest_time': 20}, {'prio': 1, 'id': 4, 'start': 9, 'rest_time': 60}, {'prio': 1, 'id': 5, 'start': 25, 'rest_time': 10}, {'prio': 1, 'id': 6, 'start': 25, 'rest_time': 30}, {'prio': 1, 'id': 7, 'start': 25, 'rest_time': 20}, {'prio': 1, 'id': 8, 'start': 36, 'rest_time': 30}, {'prio': 1, 'id': 9, 'start': 36, 'rest_time': 40}, {'prio': 1, 'id': 10, 'start': 36, 'rest_time': 50}], 'pts': 1},
+    {'name': 'hard SRTN case', 'n': 10,
+     't': 5, 'q': 15, 'a': 'SRTN',
+     'threads': [{'prio': 1, 'id': 1, 'start': 9, 'rest_time': 9}, {'prio': 1, 'id': 2, 'start': 9, 'rest_time': 18},
+                 {'prio': 1, 'id': 3, 'start': 9, 'rest_time': 20}, {'prio': 1, 'id': 4, 'start': 9, 'rest_time': 60},
+                 {'prio': 1, 'id': 5, 'start': 25, 'rest_time': 10}, {'prio': 1, 'id': 6, 'start': 25, 'rest_time': 30},
+                 {'prio': 1, 'id': 7, 'start': 25, 'rest_time': 20}, {'prio': 1, 'id': 8, 'start': 36, 'rest_time': 30},
+                 {'prio': 1, 'id': 9, 'start': 36, 'rest_time': 40},
+                 {'prio': 1, 'id': 10, 'start': 36, 'rest_time': 50}], 'pts': 1},
     {'name': 'hard RR case', 'n': 10,
      't': 10, 'q': 30, 'a': 'RR',
      'threads': [{'prio': 1, 'id': 1, 'start': 0, 'rest_time': 40}, {'prio': 1, 'id': 2, 'start': 30, 'rest_time': 50},
