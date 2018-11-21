@@ -1,0 +1,4 @@
+/u/halle/nguyetun/home_at/gbs/cmake-build-debug/CMakeFiles/edit_cache.dir
+/u/halle/nguyetun/home_at/gbs/cmake-build-debug/CMakeFiles/syncem.dir
+/u/halle/nguyetun/home_at/gbs/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/u/halle/nguyetun/home_at/gbs/cmake-build-debug/CMakeFiles/list.dir
