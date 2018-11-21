@@ -6,3 +6,27 @@
 
 #IncludeRegexTransform: 
 
+/u/halle/nguyetun/home_at/gbs/Week5/list.h
+
+/u/halle/nguyetun/home_at/gbs/Week5/syncem.c
+pthread.h
+-
+ctype.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+sys/types.h
+-
+time.h
+-
+unistd.h
+-
+fcntl.h
+-
+list.h
+/u/halle/nguyetun/home_at/gbs/Week5/list.h
+

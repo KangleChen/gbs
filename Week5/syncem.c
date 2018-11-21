@@ -6,37 +6,59 @@
 #include <sys/types.h>
 #include <time.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include "list.h"
 
-void *thread_job(void *args) {
-    int kValP = *(int *) args;
-    for (int i = 1; i <= kValP; ++i) {
-        sleep(1);
-        printf("%10u\t%d\t%ld\n", (unsigned int) pthread_self(), getpid(), i);
+void *thread_job(void *threadNumber) {
+    int myNumber= *(int *)threadNumber;
+    char fileName[20];
+    sprintf(fileName, "%d", myNumber);
+    strcat(fileName, ".txt");
+    int file=open(fileName, O_RDONLY);
+    if (file<0){
+        perror("Cannot open file");
+        return 1;
     }
-    return NULL;
+    char buffer[64];
+    int i=0;
+    ssize_t bytesRead;
+    while((bytesRead=read(file, buffer, 64))){
+        char prefix[20];
+        sprintf(prefix, "[%02d] %03d\t", myNumber, i);
+        if (write(fileno(stdout), prefix, strlen(prefix)+1)){
+            perror("There was an error while writing to stdout");
+            abort();
+        }
+        write(fileno(stdout), buffer, (int) bytesRead);
+        write(fileno(stdout), "\n", 1);
+    }
+    close(file);
 }
 
 int main(int argc, char *argv[], char *envp[]) {
-    int kVal = 10;
-    int nVal = 1;
-    int rFlag = 0;
+    int numThreads = 1;
+    int lFlag = 0;
+    int rFlag=0;
 
     int c;
 
-    while ((c = getopt(argc, argv, "k:n:r")) != -1) {
+    while ((c = getopt(argc, argv, "n:lr")) != -1) {
         switch (c) {
-            case 'k':
-                kVal = atoi(optarg);
-                break;
             case 'n':
-                nVal = atoi(optarg);
+                numThreads=atoi(optarg);
+                if (numThreads>10){
+                    perror("Can only support maximum of 10 threads");
+                    abort();
+                }
+                break;
+            case 'l':
+                lFlag=1;
                 break;
             case 'r':
-                rFlag = 1;
+                rFlag=1;
                 break;
             case '?':
-                if (optopt == 'k' || optopt == 'n')
+                if (optopt == 'n')
                     fprintf(stderr, "Option -%c requires an argument.\n", optopt);
                 else if (isprint(optopt))
                     fprintf(stderr, "Unknown option `-%c'.\n", optopt);
@@ -50,32 +72,15 @@ int main(int argc, char *argv[], char *envp[]) {
 
     list_t *thread_list = list_init();
 
-    srand(time(NULL));
-    int maxR, minR = 0;
-    if (rFlag) {
-        minR = kVal / 2;
-        maxR = 1.5 * kVal;
-    }
-
-    time_t now;
-    time(&now);
-    printf("Start: %s", ctime(&now));
-
-    for (int j = 0; j < nVal; ++j) {
-        int kValP = rFlag ? (rand() % (maxR + 1 - minR) + minR) : kVal;
+    for (int laufendeNummer = 0; laufendeNummer < numThreads; ++laufendeNummer) {
         pthread_t threadID;
-        pthread_create(&threadID, NULL, &thread_job, &kValP);
-        char threadIDString[20];
-        sprintf(threadIDString, "%lu", threadID);
-        list_append(thread_list, threadIDString);
+        pthread_create(&threadID, NULL, &thread_job, &laufendeNummer);
+        list_append(thread_list, &threadID);
     }
 
     for (list_elem *curr = thread_list->first; curr; curr = curr->next) {
-        pthread_join(atol(curr->data), NULL);
+        pthread_join(*((pthread_t *) curr->data), NULL);
     }
-
-    time(&now);
-    printf("Ende: %s", ctime(&now));
 
     list_finit(thread_list);
     return 0;

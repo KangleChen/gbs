@@ -11,7 +11,7 @@ list_t *list_init() {
     return list;
 }
 
-struct list_elem *list_insert(list_t *list, char *data) {
+struct list_elem *list_insert(list_t *list, void *data) {
     struct list_elem *list_elem1 = malloc(sizeof(struct list_elem));
     if (list_elem1 == NULL) {
         return NULL;
@@ -27,7 +27,7 @@ struct list_elem *list_insert(list_t *list, char *data) {
     return list_elem1;
 }
 
-struct list_elem *list_append(list_t *list, char *data) {
+struct list_elem *list_append(list_t *list, void *data) {
     struct list_elem *list_elem1 = malloc(sizeof(struct list_elem));
     if (list_elem1 == NULL) {
         return NULL;
@@ -72,7 +72,7 @@ void list_finit(list_t *list) {
     free(list);
 }
 
-struct list_elem *list_find(list_t *list, char *data, int (*cmp_elem)(const char *, const char *)) {
+struct list_elem *list_find(list_t *list, void *data, int (*cmp_elem)(const void *, const void *)) {
     struct list_elem *current_list_elem = list->first;
     while (current_list_elem != NULL && (*cmp_elem)(current_list_elem->data, data) != 0) {
         current_list_elem = current_list_elem->next;
