@@ -17,7 +17,7 @@ void *thread_job(void *threadNumber) {
     int file=open(fileName, O_RDONLY);
     if (file<0){
         perror("Cannot open file");
-        return 1;
+        return NULL;
     }
     char buffer[64];
     int i=0;
@@ -25,12 +25,13 @@ void *thread_job(void *threadNumber) {
     while((bytesRead=read(file, buffer, 64))){
         char prefix[20];
         sprintf(prefix, "[%02d] %03d\t", myNumber, i);
-        if (write(fileno(stdout), prefix, strlen(prefix)+1)){
+        if (write(fileno(stdout), prefix, strlen(prefix)+1)==-1){
             perror("There was an error while writing to stdout");
             abort();
         }
         write(fileno(stdout), buffer, (int) bytesRead);
         write(fileno(stdout), "\n", 1);
+        i++;
     }
     close(file);
 }
@@ -71,11 +72,16 @@ int main(int argc, char *argv[], char *envp[]) {
     }
 
     list_t *thread_list = list_init();
+    //this is a very subltle bug, we need a new variable for laufendeNummer, because we can't guarantee when the thread will deference the pointer, leading to false number passed
+    //Variables declared inside a loop won't be repeatedly allocated
+    int *threadNumber=calloc(10, sizeof(int));
 
     for (int laufendeNummer = 0; laufendeNummer < numThreads; ++laufendeNummer) {
         pthread_t threadID;
-        pthread_create(&threadID, NULL, &thread_job, &laufendeNummer);
+        *threadNumber=laufendeNummer;
+        pthread_create(&threadID, NULL, &thread_job, threadNumber);
         list_append(thread_list, &threadID);
+        threadNumber++;
     }
 
     for (list_elem *curr = thread_list->first; curr; curr = curr->next) {
