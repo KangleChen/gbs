@@ -72,7 +72,7 @@ void *thread_job(void *threadNumber) {
         }
     }
     close(file);
-    return NULL;
+
 }
 
 int main(int argc, char *argv[], char *envp[]) {
