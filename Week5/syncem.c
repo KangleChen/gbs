@@ -107,6 +107,10 @@ int main(int argc, char *argv[], char *envp[]) {
                 abort();
         }
     }
+    if (lFlag ==1 && fFlag==1){
+        printf("Only one of the flags is accepted");
+        abort();
+    }
 
     list_t *thread_list = list_init();
     //this is a very subltle bug, we need a new variable for laufendeNummer, because we can't guarantee when the thread will deference the pointer, leading to false number passed

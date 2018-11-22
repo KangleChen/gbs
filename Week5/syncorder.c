@@ -10,8 +10,21 @@
 #include "list.h"
 
 pthread_mutex_t mut;
+pthread_cond_t myCond=PTHREAD_COND_INITIALIZER;
+
 int fFlag=0;
 int lFlag=0;
+int oFlag=0;
+int reihe=0;
+
+int write_buffer (long thread, char *buffer, int len){
+    while (thread!= reihe){
+        pthread_mutex_lock(&mut);
+        pthread_cond_wait(&myCond, &mut);
+        pthread_mutex_unlock(&mut);
+    }
+    return write(fileno(stdout), buffer, len);
+}
 
 void *thread_job(void *threadNumber) {
 
@@ -30,7 +43,7 @@ void *thread_job(void *threadNumber) {
     ssize_t bytesRead;
     if (fFlag){
         pthread_mutex_lock(&mut);
-        while((bytesRead=read(file, buffer, 64))){
+        while((bytesRead=read(file, buffer, 63))){
             char prefix[20];
             sprintf(prefix, "[%02d] %03d\t", myNumber, i);
             if (write(fileno(stdout), prefix, strlen(prefix)+1)==-1){
@@ -44,7 +57,7 @@ void *thread_job(void *threadNumber) {
         pthread_mutex_unlock(&mut);
     }
     else if (lFlag){
-        while((bytesRead=read(file, buffer, 64))){
+        while((bytesRead=read(file, buffer, 63))){
             char prefix[20];
             sprintf(prefix, "[%02d] %03d\t", myNumber, i);
             pthread_mutex_lock(&mut);
@@ -57,6 +70,23 @@ void *thread_job(void *threadNumber) {
             pthread_mutex_unlock(&mut);
             i++;
         }
+    }
+    else if (oFlag){
+        while((bytesRead=read(file, buffer, 64))){
+            char prefix[20];
+            sprintf(prefix, "[%02d] %03d\t", myNumber, i);
+            if (write_buffer(myNumber, prefix, strlen(prefix)+1)==-1){
+                perror("There was an error while writing to stdout");
+                abort();
+            }
+            write_buffer(myNumber, buffer, (int) bytesRead);
+            write_buffer(myNumber, "\n", 1);
+            i++;
+        }
+        pthread_mutex_lock(&mut);
+        reihe++;
+        pthread_cond_broadcast(&myCond);
+        pthread_mutex_unlock(&mut);
     }
     else{
         while((bytesRead=read(file, buffer, 64))){
@@ -72,7 +102,7 @@ void *thread_job(void *threadNumber) {
         }
     }
     close(file);
-
+    return NULL;
 }
 
 int main(int argc, char *argv[], char *envp[]) {
@@ -80,7 +110,7 @@ int main(int argc, char *argv[], char *envp[]) {
 
     int c;
 
-    while ((c = getopt(argc, argv, "n:lf")) != -1) {
+    while ((c = getopt(argc, argv, "n:lfo")) != -1) {
         switch (c) {
             case 'n':
                 numThreads=atoi(optarg);
@@ -95,6 +125,9 @@ int main(int argc, char *argv[], char *envp[]) {
             case 'f':
                 fFlag=1;
                 break;
+            case 'o':
+                oFlag=1;
+                break;
             case '?':
                 if (optopt == 'n')
                     fprintf(stderr, "Option -%c requires an argument.\n", optopt);
@@ -106,6 +139,11 @@ int main(int argc, char *argv[], char *envp[]) {
             default:
                 abort();
         }
+    }
+
+    if (lFlag+oFlag+fFlag>=2){
+        printf("Only one of the flags is accepted");
+        abort();
     }
 
     list_t *thread_list = list_init();
