@@ -10,7 +10,10 @@
 #include "list.h"
 
 void *thread_job(void *threadNumber) {
-    int myNumber= *(int *)threadNumber;
+    //printf("Thread Start.\n");
+
+    int myNumber= *((int *)threadNumber);
+    //printf("myNum: %d\n", myNumber);
     char fileName[20];
     sprintf(fileName, "%d", myNumber);
     strcat(fileName, ".txt");
@@ -34,6 +37,7 @@ void *thread_job(void *threadNumber) {
         i++;
     }
     close(file);
+
 }
 
 int main(int argc, char *argv[], char *envp[]) {
@@ -74,14 +78,29 @@ int main(int argc, char *argv[], char *envp[]) {
     list_t *thread_list = list_init();
     //this is a very subltle bug, we need a new variable for laufendeNummer, because we can't guarantee when the thread will deference the pointer, leading to false number passed
     //Variables declared inside a loop won't be repeatedly allocated
-    int *threadNumber=calloc(10, sizeof(int));
+    //int *threadNumber=calloc(10, sizeof(int));
+    int *threadNumber[10];
+
+    for (int i = 0; i < 10; ++i) {
+        threadNumber[i] = malloc(sizeof(int));
+    }
+
+    //printf("numThrs: %d\n", numThreads);
+    pthread_t *threadID = calloc(1, sizeof(pthread_t));
 
     for (int laufendeNummer = 0; laufendeNummer < numThreads; ++laufendeNummer) {
-        pthread_t threadID;
-        *threadNumber=laufendeNummer;
-        pthread_create(&threadID, NULL, &thread_job, threadNumber);
-        list_append(thread_list, &threadID);
-        threadNumber++;
+        *threadNumber[laufendeNummer]=laufendeNummer;
+        //printf("thrNum: %d, laufNum: %d\n", *threadNumber[laufendeNummer], laufendeNummer);
+        if(pthread_create(threadID, NULL, &thread_job, threadNumber[laufendeNummer])!=0){
+            //fprint(stderr, "Could not create ")
+            perror("Error: ");
+        } else {
+            //printf("Thread successfully created.\n");
+        };
+        list_append(thread_list, threadID);
+        //threadNumber++;
+
+        threadID = calloc(1, sizeof(pthread_t));
     }
 
     for (list_elem *curr = thread_list->first; curr; curr = curr->next) {
