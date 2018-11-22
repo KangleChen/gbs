@@ -33,7 +33,7 @@ void *thread_job(void *threadNumber) {
         while((bytesRead=read(file, buffer, 64))){
             char prefix[20];
             sprintf(prefix, "[%02d] %03d\t", myNumber, i);
-            if (write(fileno(stdout), prefix, strlen(prefix)+1)==-1){
+            if (write(fileno(stdout), prefix, strlen(prefix))==-1){
                 perror("There was an error while writing to stdout");
                 abort();
             }
@@ -48,7 +48,7 @@ void *thread_job(void *threadNumber) {
             char prefix[20];
             sprintf(prefix, "[%02d] %03d\t", myNumber, i);
             pthread_mutex_lock(&mut);
-            if (write(fileno(stdout), prefix, strlen(prefix)+1)==-1){
+            if (write(fileno(stdout), prefix, strlen(prefix))==-1){
                 perror("There was an error while writing to stdout");
                 abort();
             }
@@ -62,7 +62,7 @@ void *thread_job(void *threadNumber) {
         while((bytesRead=read(file, buffer, 64))){
             char prefix[20];
             sprintf(prefix, "[%02d] %03d\t", myNumber, i);
-            if (write(fileno(stdout), prefix, strlen(prefix)+1)==-1){
+            if (write(fileno(stdout), prefix, strlen(prefix))==-1){
                 perror("There was an error while writing to stdout");
                 abort();
             }
