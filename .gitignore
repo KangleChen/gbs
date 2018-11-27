@@ -52,5 +52,7 @@ Mkfile.old
 dkms.conf
 
 *.tar
+*.tgz
+cmake-build-debug/**
 
 

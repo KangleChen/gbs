@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/swiftfortune/Documents/gbs/Week5/list.c" "/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list.dir/Week5/list.c.o"
+  "/home/swiftfortune/Documents/gbs/Week5/syncem.c" "/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/syncem.dir/Week5/syncem.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -15,6 +15,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

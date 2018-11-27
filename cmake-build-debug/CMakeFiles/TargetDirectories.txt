@@ -1,0 +1,4 @@
+/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/syncem.dir
+/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list.dir
