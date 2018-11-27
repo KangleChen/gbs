@@ -36,4 +36,6 @@ char *list_toString(list_t *list);
 
 int list_length(list_t *list);
 
+void list_to_array(list_t* list, void *dataArray[]);
+
 #endif

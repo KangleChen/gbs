@@ -115,3 +115,11 @@ char *list_toString(list_t *list){
 int list_length(list_t *list){
     return list==NULL?-1:list->count;
 }
+
+void list_to_array(list_t *list, void *dataArray[]) {
+    struct list_elem *curr = list->first;
+    for (int i = 0; curr != NULL; i++) {
+        dataArray[i] = curr->data;
+        curr = curr->next;
+    }
+}
