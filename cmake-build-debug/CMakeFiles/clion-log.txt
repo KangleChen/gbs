@@ -1,4 +1,0 @@
-/u/halle/nguyetun/home_at/Documents/clion-2018.2.6/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /u/halle/nguyetun/home_at/gbs
--- Configuring done
--- Generating done
--- Build files have been written to: /u/halle/nguyetun/home_at/gbs/cmake-build-debug

@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/syncem.dir/Week5/syncem.c.o  -o syncem liblist.a -pthread 
