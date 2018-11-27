@@ -34,4 +34,6 @@ struct list_elem *list_find(list_t *list, void *data,
 
 char *list_toString(list_t *list);
 
+int list_length(list_t *list);
+
 #endif

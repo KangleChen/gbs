@@ -2,20 +2,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
-#include "parser.c"
+
+void printString(char *data) {
+    printf("%s\n", data);
+}
 
 int main (int argc, char *argv [], char *envp []){
 
     char str[1024];
 
+    printf("$ ");
+    list_t *paras = list_init();
     while(fgets(str, 1024, stdin) != NULL) {
-      if(strcmp(str, "exit\n") !=0){
-          abort();
-      }
-      list_t *paras = parse(str, envp);
-      if(paras != NULL){
-          list_print(paras, printString);
-      }
-      printf("$ ");
+        if(paras != NULL){
+            myParse(paras, str, envp);
+            list_print(paras, printString);
+        }
+        if(strcmp(str, "exit\n") == 0){
+            exit(0);
+        }
+        printf("$ ");
     }
 }

@@ -96,15 +96,22 @@ void list_print(list_t *list, void (*print_elem)(char *)) {
 }
 
 char *list_toString(list_t *list){
-    char *res = calloc(list->count, sizeof(char));
+    char *res = calloc(list->count+1, sizeof(char));
 
     int i=0;
     struct list_elem *current_list_elem = list->first;
     while (current_list_elem != NULL) {
         res[i] = *((char *)current_list_elem->data);
+        //printf("%c", res[i]);
         current_list_elem = current_list_elem->next;
         i++;
     }
 
+    res[i]='\0';
+
     return res;
+}
+
+int list_length(list_t *list){
+    return list==NULL?-1:list->count;
 }
