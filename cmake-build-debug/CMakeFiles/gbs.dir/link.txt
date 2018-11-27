@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/gbs.dir/Week5/syncem.c.o  -o gbs 

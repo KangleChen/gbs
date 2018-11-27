@@ -6,5 +6,5 @@ C_FLAGS = -g   -pthread -std=gnu11
 
 C_DEFINES = 
 
-C_INCLUDES = -I/u/halle/nguyetun/home_at/gbs/Week5 
+C_INCLUDES = -I/home/swiftfortune/Documents/gbs/Week5 
 

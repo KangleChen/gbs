@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /u/halle/nguyetun/home_at/Documents/clion-2018.2.6/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /home/swiftfortune/Downloads/clion-2018.2.6/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /u/halle/nguyetun/home_at/Documents/clion-2018.2.6/bin/cmake/linux/bin/cmake -E remove -f
+RM = /home/swiftfortune/Downloads/clion-2018.2.6/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /u/halle/nguyetun/home_at/gbs
+CMAKE_SOURCE_DIR = /home/swiftfortune/Documents/gbs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /u/halle/nguyetun/home_at/gbs/cmake-build-debug
+CMAKE_BINARY_DIR = /home/swiftfortune/Documents/gbs/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/list.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/list.dir/flags.make
 
 CMakeFiles/list.dir/Week5/list.c.o: CMakeFiles/list.dir/flags.make
 CMakeFiles/list.dir/Week5/list.c.o: ../Week5/list.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/u/halle/nguyetun/home_at/gbs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/list.dir/Week5/list.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/list.dir/Week5/list.c.o   -c /u/halle/nguyetun/home_at/gbs/Week5/list.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/list.dir/Week5/list.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/list.dir/Week5/list.c.o   -c /home/swiftfortune/Documents/gbs/Week5/list.c
 
 CMakeFiles/list.dir/Week5/list.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/list.dir/Week5/list.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /u/halle/nguyetun/home_at/gbs/Week5/list.c > CMakeFiles/list.dir/Week5/list.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/swiftfortune/Documents/gbs/Week5/list.c > CMakeFiles/list.dir/Week5/list.c.i
 
 CMakeFiles/list.dir/Week5/list.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/list.dir/Week5/list.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /u/halle/nguyetun/home_at/gbs/Week5/list.c -o CMakeFiles/list.dir/Week5/list.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/swiftfortune/Documents/gbs/Week5/list.c -o CMakeFiles/list.dir/Week5/list.c.s
 
 # Object files for target list
 list_OBJECTS = \
@@ -80,7 +80,7 @@ list_EXTERNAL_OBJECTS =
 liblist.a: CMakeFiles/list.dir/Week5/list.c.o
 liblist.a: CMakeFiles/list.dir/build.make
 liblist.a: CMakeFiles/list.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/u/halle/nguyetun/home_at/gbs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library liblist.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library liblist.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/list.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/list.dir/link.txt --verbose=$(VERBOSE)
 
@@ -94,6 +94,6 @@ CMakeFiles/list.dir/clean:
 .PHONY : CMakeFiles/list.dir/clean
 
 CMakeFiles/list.dir/depend:
-	cd /u/halle/nguyetun/home_at/gbs/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /u/halle/nguyetun/home_at/gbs /u/halle/nguyetun/home_at/gbs /u/halle/nguyetun/home_at/gbs/cmake-build-debug /u/halle/nguyetun/home_at/gbs/cmake-build-debug /u/halle/nguyetun/home_at/gbs/cmake-build-debug/CMakeFiles/list.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/swiftfortune/Documents/gbs/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/swiftfortune/Documents/gbs /home/swiftfortune/Documents/gbs /home/swiftfortune/Documents/gbs/cmake-build-debug /home/swiftfortune/Documents/gbs/cmake-build-debug /home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/list.dir/depend
 
