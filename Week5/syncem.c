@@ -37,7 +37,7 @@ void *thread_job(void *threadNumber) {
                 perror("There was an error while writing to stdout");
                 abort();
             }
-            write(fileno(stdout), buffer, (int) bytesRead);
+            write(fileno(stdout), buffer, (unsigned int) bytesRead);
             write(fileno(stdout), "\n", 1);
             i++;
         }
@@ -52,7 +52,7 @@ void *thread_job(void *threadNumber) {
                 perror("There was an error while writing to stdout");
                 abort();
             }
-            write(fileno(stdout), buffer, (int) bytesRead);
+            write(fileno(stdout), buffer, (unsigned int) bytesRead);
             write(fileno(stdout), "\n", 1);
             pthread_mutex_unlock(&mut);
             i++;
