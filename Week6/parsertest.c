@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "list.h"
 
+extern list_t *myParse(list_t *res, char *str, char *envp[]);
+
 void printString(char *data) {
     printf("%s\n", data);
 }

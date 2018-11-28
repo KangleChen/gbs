@@ -5,6 +5,8 @@
 #include <sys/wait.h>
 #include "list.h"
 
+extern list_t *myParse(list_t *res, char *str, char *envp[]);
+
 int intPcmp(const void *intP1, const void *intP2){
     return (*(int *)intP1) - (*(int *)intP2);
 }
@@ -46,13 +48,18 @@ int main (int argc, char *argv [], char *envp []){
             } else {
 
                 ptr = strtok(string, delimiter);
+                char* cmd;
 
                 while (ptr != NULL) {
-                    char cmd[strlen(ptr) + strlen(argv[0]) + 1];
+                    cmd=calloc(strlen(ptr) + strlen(argv[0]) + 1, sizeof(char *));
                     sprintf(cmd, "%s/%s", ptr, argv[0]);
 
-                    execve(cmd, argv, envp);
-
+                    int returnValue=execve(cmd, argv, envp);
+                    if (returnValue==-1) {
+                        ptr = strtok(NULL, delimiter);
+                        free(cmd);
+                        continue;
+                    }
                     // naechsten Abschnitt erstellen
                     ptr = strtok(NULL, delimiter);
                 }
