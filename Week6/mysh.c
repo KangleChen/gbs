@@ -48,18 +48,13 @@ int main (int argc, char *argv [], char *envp []){
             } else {
 
                 ptr = strtok(string, delimiter);
-                char* cmd;
 
                 while (ptr != NULL) {
-                    cmd=calloc(strlen(ptr) + strlen(argv[0]) + 1, sizeof(char *));
+                    char cmd[strlen(ptr) + strlen(argv[0]) + 2];
                     sprintf(cmd, "%s/%s", ptr, argv[0]);
 
-                    int returnValue=execve(cmd, argv, envp);
-                    if (returnValue==-1) {
-                        ptr = strtok(NULL, delimiter);
-                        free(cmd);
-                        continue;
-                    }
+                    execve(cmd, argv, envp);
+
                     // naechsten Abschnitt erstellen
                     ptr = strtok(NULL, delimiter);
                 }
