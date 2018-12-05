@@ -4,7 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/swiftfortune/Documents/gbs/Week5/list.c" "/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list.dir/Week5/list.c.o"
+  "/home/swiftfortune/Documents/gbs/Week7/list.c" "/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list.dir/Week7/list.c.o"
+  "/home/swiftfortune/Documents/gbs/Week7/parser.c" "/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list.dir/Week7/parser.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
