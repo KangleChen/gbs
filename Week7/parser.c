@@ -180,11 +180,15 @@ int myParseStg2(list_t *args, char **outFileP, char **inFileP) {
             }
         }
 
+        // TODO: Maybe rewrite deleting, not very nice style, just use a while loop
         while (delCurrCount > 0) {
             struct list_elem *currT = curr;
             curr = curr->next;
             list_remove(args, currT);
             delCurrCount--;
+            if(delCurrCount==0){
+                curr = &((struct list_elem){ .next=curr});
+            }
         }
     }
     return retVal;
