@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named syncem
+# Target rules for targets named mysh
 
 # Build rule for target.
-syncem: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 syncem
-.PHONY : syncem
+mysh: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mysh
+.PHONY : mysh
 
 # fast build rule for target.
-syncem/fast:
-	$(MAKE) -f CMakeFiles/syncem.dir/build.make CMakeFiles/syncem.dir/build
-.PHONY : syncem/fast
+mysh/fast:
+	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/build
+.PHONY : mysh/fast
 
 #=============================================================================
 # Target rules for targets named list
@@ -136,59 +136,86 @@ list/fast:
 	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/build
 .PHONY : list/fast
 
-Week5/list.o: Week5/list.c.o
+Week7/list.o: Week7/list.c.o
 
-.PHONY : Week5/list.o
-
-# target to build an object file
-Week5/list.c.o:
-	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week5/list.c.o
-.PHONY : Week5/list.c.o
-
-Week5/list.i: Week5/list.c.i
-
-.PHONY : Week5/list.i
-
-# target to preprocess a source file
-Week5/list.c.i:
-	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week5/list.c.i
-.PHONY : Week5/list.c.i
-
-Week5/list.s: Week5/list.c.s
-
-.PHONY : Week5/list.s
-
-# target to generate assembly for a file
-Week5/list.c.s:
-	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week5/list.c.s
-.PHONY : Week5/list.c.s
-
-Week5/syncem.o: Week5/syncem.c.o
-
-.PHONY : Week5/syncem.o
+.PHONY : Week7/list.o
 
 # target to build an object file
-Week5/syncem.c.o:
-	$(MAKE) -f CMakeFiles/syncem.dir/build.make CMakeFiles/syncem.dir/Week5/syncem.c.o
-.PHONY : Week5/syncem.c.o
+Week7/list.c.o:
+	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week7/list.c.o
+.PHONY : Week7/list.c.o
 
-Week5/syncem.i: Week5/syncem.c.i
+Week7/list.i: Week7/list.c.i
 
-.PHONY : Week5/syncem.i
+.PHONY : Week7/list.i
 
 # target to preprocess a source file
-Week5/syncem.c.i:
-	$(MAKE) -f CMakeFiles/syncem.dir/build.make CMakeFiles/syncem.dir/Week5/syncem.c.i
-.PHONY : Week5/syncem.c.i
+Week7/list.c.i:
+	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week7/list.c.i
+.PHONY : Week7/list.c.i
 
-Week5/syncem.s: Week5/syncem.c.s
+Week7/list.s: Week7/list.c.s
 
-.PHONY : Week5/syncem.s
+.PHONY : Week7/list.s
 
 # target to generate assembly for a file
-Week5/syncem.c.s:
-	$(MAKE) -f CMakeFiles/syncem.dir/build.make CMakeFiles/syncem.dir/Week5/syncem.c.s
-.PHONY : Week5/syncem.c.s
+Week7/list.c.s:
+	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week7/list.c.s
+.PHONY : Week7/list.c.s
+
+Week7/mysh.o: Week7/mysh.c.o
+
+.PHONY : Week7/mysh.o
+
+# target to build an object file
+Week7/mysh.c.o:
+	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/Week7/mysh.c.o
+.PHONY : Week7/mysh.c.o
+
+Week7/mysh.i: Week7/mysh.c.i
+
+.PHONY : Week7/mysh.i
+
+# target to preprocess a source file
+Week7/mysh.c.i:
+	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/Week7/mysh.c.i
+.PHONY : Week7/mysh.c.i
+
+Week7/mysh.s: Week7/mysh.c.s
+
+.PHONY : Week7/mysh.s
+
+# target to generate assembly for a file
+Week7/mysh.c.s:
+	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/Week7/mysh.c.s
+.PHONY : Week7/mysh.c.s
+
+Week7/parser.o: Week7/parser.c.o
+
+.PHONY : Week7/parser.o
+
+# target to build an object file
+Week7/parser.c.o:
+	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week7/parser.c.o
+.PHONY : Week7/parser.c.o
+
+Week7/parser.i: Week7/parser.c.i
+
+.PHONY : Week7/parser.i
+
+# target to preprocess a source file
+Week7/parser.c.i:
+	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week7/parser.c.i
+.PHONY : Week7/parser.c.i
+
+Week7/parser.s: Week7/parser.c.s
+
+.PHONY : Week7/parser.s
+
+# target to generate assembly for a file
+Week7/parser.c.s:
+	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week7/parser.c.s
+.PHONY : Week7/parser.c.s
 
 # Help Target
 help:
@@ -197,15 +224,18 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... syncem"
+	@echo "... mysh"
 	@echo "... rebuild_cache"
 	@echo "... list"
-	@echo "... Week5/list.o"
-	@echo "... Week5/list.i"
-	@echo "... Week5/list.s"
-	@echo "... Week5/syncem.o"
-	@echo "... Week5/syncem.i"
-	@echo "... Week5/syncem.s"
+	@echo "... Week7/list.o"
+	@echo "... Week7/list.i"
+	@echo "... Week7/list.s"
+	@echo "... Week7/mysh.o"
+	@echo "... Week7/mysh.i"
+	@echo "... Week7/mysh.s"
+	@echo "... Week7/parser.o"
+	@echo "... Week7/parser.i"
+	@echo "... Week7/parser.s"
 .PHONY : help
 
 

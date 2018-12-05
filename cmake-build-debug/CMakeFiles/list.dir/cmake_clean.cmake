@@ -1,10 +1,11 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/List.dir/Week5/list.c.o"
-  "libList.pdb"
-  "libList.a"
+  "CMakeFiles/list.dir/Week7/list.c.o"
+  "CMakeFiles/list.dir/Week7/parser.c.o"
+  "liblist.pdb"
+  "liblist.a"
 )
 
 # Per-language clean rules from dependency scanning.
 foreach(lang C)
-  include(CMakeFiles/List.dir/cmake_clean_${lang}.cmake OPTIONAL)
+  include(CMakeFiles/list.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

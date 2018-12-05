@@ -57,30 +57,45 @@ include CMakeFiles/list.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/list.dir/flags.make
 
-CMakeFiles/list.dir/Week5/list.c.o: CMakeFiles/list.dir/flags.make
-CMakeFiles/list.dir/Week5/list.c.o: ../Week5/list.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/list.dir/Week5/list.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/list.dir/Week5/list.c.o   -c /home/swiftfortune/Documents/gbs/Week5/list.c
+CMakeFiles/list.dir/Week7/list.c.o: CMakeFiles/list.dir/flags.make
+CMakeFiles/list.dir/Week7/list.c.o: ../Week7/list.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/list.dir/Week7/list.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/list.dir/Week7/list.c.o   -c /home/swiftfortune/Documents/gbs/Week7/list.c
 
-CMakeFiles/list.dir/Week5/list.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/list.dir/Week5/list.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/swiftfortune/Documents/gbs/Week5/list.c > CMakeFiles/list.dir/Week5/list.c.i
+CMakeFiles/list.dir/Week7/list.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/list.dir/Week7/list.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/swiftfortune/Documents/gbs/Week7/list.c > CMakeFiles/list.dir/Week7/list.c.i
 
-CMakeFiles/list.dir/Week5/list.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/list.dir/Week5/list.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/swiftfortune/Documents/gbs/Week5/list.c -o CMakeFiles/list.dir/Week5/list.c.s
+CMakeFiles/list.dir/Week7/list.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/list.dir/Week7/list.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/swiftfortune/Documents/gbs/Week7/list.c -o CMakeFiles/list.dir/Week7/list.c.s
+
+CMakeFiles/list.dir/Week7/parser.c.o: CMakeFiles/list.dir/flags.make
+CMakeFiles/list.dir/Week7/parser.c.o: ../Week7/parser.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/list.dir/Week7/parser.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/list.dir/Week7/parser.c.o   -c /home/swiftfortune/Documents/gbs/Week7/parser.c
+
+CMakeFiles/list.dir/Week7/parser.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/list.dir/Week7/parser.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/swiftfortune/Documents/gbs/Week7/parser.c > CMakeFiles/list.dir/Week7/parser.c.i
+
+CMakeFiles/list.dir/Week7/parser.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/list.dir/Week7/parser.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/swiftfortune/Documents/gbs/Week7/parser.c -o CMakeFiles/list.dir/Week7/parser.c.s
 
 # Object files for target list
 list_OBJECTS = \
-"CMakeFiles/list.dir/Week5/list.c.o"
+"CMakeFiles/list.dir/Week7/list.c.o" \
+"CMakeFiles/list.dir/Week7/parser.c.o"
 
 # External object files for target list
 list_EXTERNAL_OBJECTS =
 
-liblist.a: CMakeFiles/list.dir/Week5/list.c.o
+liblist.a: CMakeFiles/list.dir/Week7/list.c.o
+liblist.a: CMakeFiles/list.dir/Week7/parser.c.o
 liblist.a: CMakeFiles/list.dir/build.make
 liblist.a: CMakeFiles/list.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library liblist.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C static library liblist.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/list.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/list.dir/link.txt --verbose=$(VERBOSE)
 

@@ -27,8 +27,8 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="syncem">
-				<Option output="/home/swiftfortune/Documents/gbs/cmake-build-debug/syncem" prefix_auto="0" extension_auto="0"/>
+			<Target title="mysh">
+				<Option output="/home/swiftfortune/Documents/gbs/cmake-build-debug/mysh" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/swiftfortune/Documents/gbs/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -42,14 +42,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 syncem"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 mysh"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="syncem/fast">
-				<Option output="/home/swiftfortune/Documents/gbs/cmake-build-debug/syncem" prefix_auto="0" extension_auto="0"/>
+			<Target title="mysh/fast">
+				<Option output="/home/swiftfortune/Documents/gbs/cmake-build-debug/mysh" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/swiftfortune/Documents/gbs/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -63,7 +63,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 syncem/fast"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 mysh/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -122,14 +122,17 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/swiftfortune/Documents/gbs/Week5/list.c">
+		<Unit filename="/home/swiftfortune/Documents/gbs/Week7/list.c">
 			<Option target="list"/>
 		</Unit>
-		<Unit filename="/home/swiftfortune/Documents/gbs/Week5/list.h">
+		<Unit filename="/home/swiftfortune/Documents/gbs/Week7/list.h">
 			<Option target="list"/>
 		</Unit>
-		<Unit filename="/home/swiftfortune/Documents/gbs/Week5/syncem.c">
-			<Option target="syncem"/>
+		<Unit filename="/home/swiftfortune/Documents/gbs/Week7/mysh.c">
+			<Option target="mysh"/>
+		</Unit>
+		<Unit filename="/home/swiftfortune/Documents/gbs/Week7/parser.c">
+			<Option target="list"/>
 		</Unit>
 		<Unit filename="/home/swiftfortune/Documents/gbs/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
