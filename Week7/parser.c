@@ -6,9 +6,13 @@
 
 #ifndef BIT_MAN
 #define BIT_MAN
-#define _BS(x, n) (x | (1UL << n));
+// set nth bit of x
+#define _BS(x, n) (x | (1 << n));
+// clear nth bit of x
 #define _BC(x, n) (x & (~(1UL << n)));
+// toggle nth bit of x
 #define _BT(x, n) (x ^ (1UL << n));
+// check nth bit of x
 #define _CB(x, n) ((x >> n) & 1U);
 #endif
 
@@ -134,22 +138,22 @@ list_t *myParse(list_t *res, char *str, char *envp[]) {
 // Returns -1 if error occured, 0b01 if Out-red was found, 0b10 if In-red was found,
 // and 0b11 if both redirects were found
 // removes '>', '<' and there argumments from the args list
-int myParseStg2(list_t *args, char **outFile, char **inFile) {
+int myParseStg2(list_t *args, char **outFileP, char **inFileP) {
     int retVal = 0;
     int delCurrCount = 0;
-    *outFile = NULL;
-    *inFile = NULL;
-    for (struct list_elem *curr = list->first; curr; curr = curr->next) {
+    *outFileP = NULL;
+    *inFileP = NULL;
+    for (struct list_elem *curr = args->first; curr; curr = curr->next) {
         if (strcmp((char *) curr->data, ">") == 0) {
             if (curr->next != NULL) {
                 char *outFileT = (char *) curr->next->data;
-                *outFile = calloc(strlen(outFileT) + 1, sizeof(char));
-                strcpy(*outFile, outFileT);
-                if (strcmp(*outFile, outFileT) == 0) {
+                *outFileP = calloc(strlen(outFileT) + 1, sizeof(char));
+                strcpy(*outFileP, outFileT);
+                if (strcmp(*outFileP, outFileT) == 0) {
                     retVal = _BS(retVal, 0);
                     delCurrCount = 2;
                 } else {
-                    *outFile = NULL;
+                    *outFileP = NULL;
                     retVal = -1;
                     break;
                 }
@@ -160,13 +164,13 @@ int myParseStg2(list_t *args, char **outFile, char **inFile) {
         } else if (strcmp((char *) curr->data, "<") == 0) {
             if (curr->next != NULL) {
                 char *inFileT = (char *) curr->next->data;
-                *inFile = calloc(strlen(inFileT) + 1, sizeof(char));
-                strcpy(*inFile, inFileT);
-                if (strcmp(*inFile, inFileT) == 0) {
+                *inFileP = calloc(strlen(inFileT) + 1, sizeof(char));
+                strcpy(*inFileP, inFileT);
+                if (strcmp(*inFileP, inFileT) == 0) {
                     retVal = _BS(retVal, 1);
                     delCurrCount = 2;
                 } else {
-                    *inFile = NULL;
+                    *inFileP = NULL;
                     retVal = -1;
                     break;
                 }

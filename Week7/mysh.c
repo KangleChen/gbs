@@ -3,11 +3,15 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #include "list.h"
 
 extern list_t *myParse(list_t *res, char *str, char *envp[]);
+extern int myParseStg2(list_t *args, char **outFileP, char **inFileP);
 
-int intPcmp(const void *intP1, const void *intP2){
+    int intPcmp(const void *intP1, const void *intP2){
     return (*(int *)intP1) - (*(int *)intP2);
 }
 
@@ -18,11 +22,15 @@ int main (int argc, char *argv [], char *envp []){
     list_t *tL = list_init();
     list_t *paras = list_init();
 
+    char **outFileP = malloc(sizeof(char*));
+    char **inFileP = malloc(sizeof(char*));
+
     printf("$ ");
     fflush(stdout);
     while(fgets(str, 1024, stdin) != NULL) {
         if(paras != NULL){
             myParse(paras, str, envp);
+            myParseStg2(paras, outFileP, inFileP);
         }
         if(strcmp(str, "exit\n") == 0){
             exit(0);
@@ -41,6 +49,17 @@ int main (int argc, char *argv [], char *envp []){
             if(string == NULL){
                 fprintf(stderr, "No PATH variable");
                 exit(-1);
+            }
+
+            int fd = -1;
+
+            if(*outFileP != NULL && (fd = open(*outFileP, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR)) >= 0){
+                dup2(fd, STDOUT_FILENO);
+                close(fd);
+            }
+            if(*inFileP != NULL && (fd = open(*inFileP, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR)) >= 0){
+                dup2(fd, STDIN_FILENO);
+                close(fd);
             }
 
             if(strchr(argv[0], '/') != NULL){
