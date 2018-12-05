@@ -53,7 +53,7 @@ int main (int argc, char *argv [], char *envp []){
                     char cmd[strlen(ptr) + strlen(argv[0]) + 2];
                     sprintf(cmd, "%s/%s", ptr, argv[0]);
 
-                    execve(cmd, argv, envp); int returnVl;
+                    execve(cmd, argv, envp);
 
                     // naechsten Abschnitt erstellen
                     ptr = strtok(NULL, delimiter);
