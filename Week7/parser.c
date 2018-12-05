@@ -129,9 +129,16 @@ list_t *myParse(list_t *res, char *str, char *envp[]) {
     return res;
 }
 
-int myParseStg2(list_t *args, char **outFile, char *inFile) {
+// Gets Input-/Output- redirects and stores the filenames in the Pointers
+// Pointers are NULL if no redirect was found or if an error occured
+// Returns -1 if error occured, 0b01 if Out-red was found, 0b10 if In-red was found,
+// and 0b11 if both redirects were found
+// removes '>', '<' and there argumments from the args list
+int myParseStg2(list_t *args, char **outFile, char **inFile) {
     int retVal = 0;
     int delCurrCount = 0;
+    *outFile = NULL;
+    *inFile = NULL;
     for (struct list_elem *curr = list->first; curr; curr = curr->next) {
         if (strcmp((char *) curr->data, ">") == 0) {
             if (curr->next != NULL) {
@@ -142,6 +149,7 @@ int myParseStg2(list_t *args, char **outFile, char *inFile) {
                     retVal = _BS(retVal, 0);
                     delCurrCount = 2;
                 } else {
+                    *outFile = NULL;
                     retVal = -1;
                     break;
                 }
@@ -158,6 +166,7 @@ int myParseStg2(list_t *args, char **outFile, char *inFile) {
                     retVal = _BS(retVal, 1);
                     delCurrCount = 2;
                 } else {
+                    *inFile = NULL;
                     retVal = -1;
                     break;
                 }
