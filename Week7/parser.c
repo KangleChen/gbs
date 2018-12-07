@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #ifndef BIT_MAN
 #define BIT_MAN
@@ -186,10 +187,40 @@ int myParseStg2(list_t *args, char **outFileP, char **inFileP) {
             curr = curr->next;
             list_remove(args, currT);
             delCurrCount--;
-            if(delCurrCount==0){
-                curr = &((struct list_elem){ .next=curr});
+            if (delCurrCount == 0) {
+                curr = &((struct list_elem) {.next=curr});
             }
         }
     }
     return retVal;
+}
+
+int myParsePipe(list_t *args, list_t *args2, int pipeA[]) {
+    if (pipeA == NULL || args2 == NULL || args == NULL || args->count <= 0) {
+        return -1;
+    }
+
+    struct list_elem *prev = NULL, *curr = NULL;
+    for (curr = args->first; curr != NULL; prev = curr, curr = curr->next) {
+        if (strcmp((char *) curr->data, "|") == 0) {
+            break;
+        }
+    }
+
+    if(curr == NULL){
+        return -2;
+    }
+
+    list_removeAll(args2);
+
+    args2->last = args->last;
+    args2->first = curr->next;
+    args->last = prev;
+    prev->next = NULL;
+
+
+    list_updateCount(args);
+    list_updateCount(args2);
+
+    return pipe(pipeA);
 }

@@ -67,13 +67,14 @@ int list_remove(list_t *list, struct list_elem *elem) {
     return -1;
 }
 
-void list_removeAll(list_t *list){
+void list_removeAll(list_t *list) {
     while (list->first != NULL) {
         list_remove(list, list->last);
     }
 }
 
 void list_finit(list_t *list) {
+    if (list == NULL) return;
     list_removeAll(list);
     free(list);
 }
@@ -95,25 +96,25 @@ void list_print(list_t *list, void (*print_elem)(char *)) {
     }
 }
 
-char *list_toString(list_t *list){
-    char *res = calloc(list->count+1, sizeof(char));
+char *list_toString(list_t *list) {
+    char *res = calloc(list->count + 1, sizeof(char));
 
-    int i=0;
+    int i = 0;
     struct list_elem *current_list_elem = list->first;
     while (current_list_elem != NULL) {
-        res[i] = *((char *)current_list_elem->data);
+        res[i] = *((char *) current_list_elem->data);
         //printf("%c", res[i]);
         current_list_elem = current_list_elem->next;
         i++;
     }
 
-    res[i]='\0';
+    res[i] = '\0';
 
     return res;
 }
 
-int list_length(list_t *list){
-    return list==NULL?-1:list->count;
+int list_length(list_t *list) {
+    return list == NULL ? -1 : list->count;
 }
 
 void list_to_array(list_t *list, void *dataArray[]) {
@@ -122,4 +123,14 @@ void list_to_array(list_t *list, void *dataArray[]) {
         dataArray[i] = curr->data;
         curr = curr->next;
     }
+}
+
+int list_updateCount(list_t *list) {
+    list->count = 0;
+    struct list_elem *curr = list->first;
+    while (curr != NULL) {
+        list->count++;
+        curr = curr->next;
+    }
+    return list->count;
 }
