@@ -26,12 +26,18 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
     list_t *args2 = list_init();
 
 
-    int pipeA[2];
-    if (myParsePipe(cmdList, args2, pipeA) >= 0) {
-        processCmd(tL, args2, envp, pipeA[0], cL);
+    int pipeA2[2];
+    if (myParsePipe(cmdList, args2, pipeA2) >= 0) {
+        int *cP = malloc(sizeof(int));
+        *cP = pipeA2[0];
+        list_append(cL, cP);
+        cP = malloc(sizeof(int));
+        *cP = pipeA2[1];
+        list_append(cL, cP);
+        processCmd(tL, args2, envp, pipeA2[0], cL);
     } else {
-        pipeA[0] = -1;
-        pipeA[1] = -1;
+        pipeA2[0] = -1;
+        pipeA2[1] = -1;
     }
 
     myParseStg2(cmdList, outFileP, inFileP);
@@ -50,18 +56,18 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
             exit(-1);
         }
 
-        if (pipeA[0] >= 0) {
-            close(pipeA[0]);
+        if (pipeA2[1] > 0) {
+            dup2(pipeA2[1], STDOUT_FILENO);
         }
-
-        if (pipeA[1] >= 0) {
-            dup2(pipeA[1], STDOUT_FILENO);
-            close(pipeA[1]);
-        }
-
-        if (inPipe >= 0) {
+        if (inPipe > 0) {
             dup2(inPipe, STDIN_FILENO);
-            close(inPipe);
+        }
+
+        while (cL->first != NULL) {
+            struct list_elem *cC = cL->first;
+            close(*((int*)cC->data));
+            free(cC->data);
+            list_remove(cL, cC);
         }
 
         int fd = -1;
@@ -95,12 +101,6 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
             exit(-1);
         }
     } else {
-        if (pipeA[1] >= 0) {
-            list_append(cL, &pipeA[1]);
-        }
-        if (pipeA[0] >= 0) {
-            list_append(cL, &pipeA[0]);
-        }
         int *cpidP = malloc(sizeof(int));
         *cpidP = cpid;
         list_append(tL, cpidP);
@@ -125,16 +125,20 @@ int main(int argc, char *argv[], char *envp[]) {
         }
         if (strcmp(str, "exit\n") == 0) {
             list_finit(tL);
+            list_finit(cL);
             exit(0);
         }
 
         processCmd(tL, paras, envp, -1, cL);
 
+
         while (cL->first != NULL) {
             struct list_elem *cC = cL->first;
             close(*((int*)cC->data));
+            free(cC->data);
             list_remove(cL, cC);
         }
+
 
             int cpid;
         while (tL->first != NULL) {
