@@ -14,14 +14,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11ffb64a-6278-49f8-8071-ca05163c36a9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/gbs.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/gbs.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Week8/gbs-kap-05-prozesskommunikation.pdf" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Week8/server.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+            <state relative-caret-position="1100">
+              <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -66,7 +60,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
+  <component name="ProjectFrameBounds">
     <option name="width" value="959" />
     <option name="height" value="1052" />
   </component>
@@ -106,7 +100,22 @@
             <path>
               <item name="gbs" type="b2602c69:ProjectViewProjectNode" />
               <item name="gbs" type="462c0819:PsiDirectoryNode" />
-              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
+              <item name="Week1_J" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gbs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gbs" type="462c0819:PsiDirectoryNode" />
+              <item name="Week1_P" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gbs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gbs" type="462c0819:PsiDirectoryNode" />
+              <item name="Week7" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gbs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gbs" type="462c0819:PsiDirectoryNode" />
+              <item name="Week8" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -123,6 +132,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Week8" />
       <recent name="$PROJECT_DIR$/Week7" />
       <recent name="$PROJECT_DIR$/Week5" />
     </key>
@@ -139,7 +149,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.mysh">
+  <component name="RunManager" selected="Application.server">
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -187,7 +197,7 @@
       <workItem from="1542810752431" duration="3752000" />
       <workItem from="1542895471149" duration="2973000" />
       <workItem from="1544001387668" duration="2733000" />
-      <workItem from="1544835478362" duration="591000" />
+      <workItem from="1544835478362" duration="8006000" />
     </task>
     <task id="LOCAL-00001" summary="blub">
       <created>1543349556668</created>
@@ -207,7 +217,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28257000" />
+    <option name="totallyTimeSpent" value="35672000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -219,10 +229,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="959" height="1052" extended-state="4" />
-    <editor active="true" />
+    <frame x="0" y="0" width="959" height="1052" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4964706" weight="0.21844128" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4964706" visible="true" weight="0.21844128" />
       <window_info id="Structure" order="1" sideWeight="0.5035294" side_tool="true" weight="0.56634307" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -234,10 +243,10 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32899022" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.22692725" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.22692725" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32790446" />
-      <window_info active="true" anchor="bottom" id="CMake" order="12" visible="true" weight="0.32790446" />
+      <window_info anchor="bottom" id="CMake" order="12" weight="0.32790446" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -436,10 +445,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///usr/include/x86_64-linux-gnu/sys/socket.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="231" selection-start-line="231" selection-end-line="231" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Week8/list.c">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Week8/hexdump.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Week8/server.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+        <state relative-caret-position="1100">
+          <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
