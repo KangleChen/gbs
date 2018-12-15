@@ -13,5 +13,7 @@ add_library(list Week7/list.c Week7/parser.c)
 #so that it will get linked
 add_executable(mysh
         Week7/mysh.c)
+add_executable(server Week8/server.c)
+target_link_libraries(server list Threads::Threads)
 target_link_libraries(mysh list Threads::Threads)
 

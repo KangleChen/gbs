@@ -48,6 +48,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/mysh.dir/DependInfo.cmake"
   "CMakeFiles/list.dir/DependInfo.cmake"
+  "CMakeFiles/server.dir/DependInfo.cmake"
+  "CMakeFiles/mysh.dir/DependInfo.cmake"
   )

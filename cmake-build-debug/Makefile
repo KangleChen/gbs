@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/swiftfortune/Documents/gbs/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/swiftfortune/Downloads/clion-2018.2.6/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/swiftfortune/Downloads/clion-2018.2.6/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,19 +111,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named mysh
-
-# Build rule for target.
-mysh: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 mysh
-.PHONY : mysh
-
-# fast build rule for target.
-mysh/fast:
-	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/build
-.PHONY : mysh/fast
-
-#=============================================================================
 # Target rules for targets named list
 
 # Build rule for target.
@@ -135,6 +122,32 @@ list: cmake_check_build_system
 list/fast:
 	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/build
 .PHONY : list/fast
+
+#=============================================================================
+# Target rules for targets named server
+
+# Build rule for target.
+server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 server
+.PHONY : server
+
+# fast build rule for target.
+server/fast:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
+
+#=============================================================================
+# Target rules for targets named mysh
+
+# Build rule for target.
+mysh: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mysh
+.PHONY : mysh
+
+# fast build rule for target.
+mysh/fast:
+	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/build
+.PHONY : mysh/fast
 
 Week7/list.o: Week7/list.c.o
 
@@ -217,16 +230,44 @@ Week7/parser.c.s:
 	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week7/parser.c.s
 .PHONY : Week7/parser.c.s
 
+Week8/server.o: Week8/server.c.o
+
+.PHONY : Week8/server.o
+
+# target to build an object file
+Week8/server.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Week8/server.c.o
+.PHONY : Week8/server.c.o
+
+Week8/server.i: Week8/server.c.i
+
+.PHONY : Week8/server.i
+
+# target to preprocess a source file
+Week8/server.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Week8/server.c.i
+.PHONY : Week8/server.c.i
+
+Week8/server.s: Week8/server.c.s
+
+.PHONY : Week8/server.s
+
+# target to generate assembly for a file
+Week8/server.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Week8/server.c.s
+.PHONY : Week8/server.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
-	@echo "... mysh"
 	@echo "... rebuild_cache"
 	@echo "... list"
+	@echo "... server"
+	@echo "... mysh"
+	@echo "... edit_cache"
 	@echo "... Week7/list.o"
 	@echo "... Week7/list.i"
 	@echo "... Week7/list.s"
@@ -236,6 +277,9 @@ help:
 	@echo "... Week7/parser.o"
 	@echo "... Week7/parser.i"
 	@echo "... Week7/parser.s"
+	@echo "... Week8/server.o"
+	@echo "... Week8/server.i"
+	@echo "... Week8/server.s"
 .PHONY : help
 
 

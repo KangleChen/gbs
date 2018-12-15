@@ -65,43 +65,6 @@ CMAKE_SOURCE_DIR = /home/swiftfortune/Documents/gbs
 CMAKE_BINARY_DIR = /home/swiftfortune/Documents/gbs/cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/mysh.dir
-
-# All Build rule for target.
-CMakeFiles/mysh.dir/all: CMakeFiles/list.dir/all
-	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/depend
-	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles --progress-num=4,5 "Built target mysh"
-.PHONY : CMakeFiles/mysh.dir/all
-
-# Include target in all.
-all: CMakeFiles/mysh.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/mysh.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles 5
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/mysh.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/mysh.dir/rule
-
-# Convenience name for target.
-mysh: CMakeFiles/mysh.dir/rule
-
-.PHONY : mysh
-
-# clean rule for target.
-CMakeFiles/mysh.dir/clean:
-	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/clean
-.PHONY : CMakeFiles/mysh.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/mysh.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/list.dir
 
 # All Build rule for target.
@@ -135,6 +98,80 @@ CMakeFiles/list.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/list.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/server.dir
+
+# All Build rule for target.
+CMakeFiles/server.dir/all: CMakeFiles/list.dir/all
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/depend
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles --progress-num=6,7 "Built target server"
+.PHONY : CMakeFiles/server.dir/all
+
+# Include target in all.
+all: CMakeFiles/server.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/server.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/server.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/server.dir/rule
+
+# Convenience name for target.
+server: CMakeFiles/server.dir/rule
+
+.PHONY : server
+
+# clean rule for target.
+CMakeFiles/server.dir/clean:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/clean
+.PHONY : CMakeFiles/server.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/server.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/mysh.dir
+
+# All Build rule for target.
+CMakeFiles/mysh.dir/all: CMakeFiles/list.dir/all
+	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/depend
+	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles --progress-num=4,5 "Built target mysh"
+.PHONY : CMakeFiles/mysh.dir/all
+
+# Include target in all.
+all: CMakeFiles/mysh.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/mysh.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/mysh.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/mysh.dir/rule
+
+# Convenience name for target.
+mysh: CMakeFiles/mysh.dir/rule
+
+.PHONY : mysh
+
+# clean rule for target.
+CMakeFiles/mysh.dir/clean:
+	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/clean
+.PHONY : CMakeFiles/mysh.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/mysh.dir/clean
 
 .PHONY : clean
 
