@@ -1,2 +1,0 @@
-/usr/bin/ar qc liblist.a  CMakeFiles/list.dir/Week7/list.c.o CMakeFiles/list.dir/Week7/parser.c.o
-/usr/bin/ranlib liblist.a
