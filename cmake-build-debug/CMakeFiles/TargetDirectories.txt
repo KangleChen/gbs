@@ -1,5 +1,6 @@
 /home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list.dir
-/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/server.dir
-/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/mysh.dir
 /home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/mysh.dir
+/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list8.dir
+/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/server.dir

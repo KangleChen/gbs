@@ -30,7 +30,7 @@ void list_removeAll(list_t *list);
 void list_print(list_t *list, void (*print_elem)(char *));
 
 struct list_elem *list_find(list_t *list, void *data,
-                            int (*cmp_elem)(const void *, const void *));
+                            int (*cmp_elem)(void *, void *));
 
 char *list_toString(list_t *list);
 
@@ -39,5 +39,7 @@ int list_length(list_t *list);
 void list_to_array(list_t* list, void *dataArray[]);
 
 int list_updateCount(list_t *list);
+
+void *list_findmin(list_t *list, int (*comparator)(void *, void *));
 
 #endif

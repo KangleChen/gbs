@@ -124,19 +124,6 @@ list/fast:
 .PHONY : list/fast
 
 #=============================================================================
-# Target rules for targets named server
-
-# Build rule for target.
-server: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 server
-.PHONY : server
-
-# fast build rule for target.
-server/fast:
-	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
-.PHONY : server/fast
-
-#=============================================================================
 # Target rules for targets named mysh
 
 # Build rule for target.
@@ -148,6 +135,32 @@ mysh: cmake_check_build_system
 mysh/fast:
 	$(MAKE) -f CMakeFiles/mysh.dir/build.make CMakeFiles/mysh.dir/build
 .PHONY : mysh/fast
+
+#=============================================================================
+# Target rules for targets named list8
+
+# Build rule for target.
+list8: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 list8
+.PHONY : list8
+
+# fast build rule for target.
+list8/fast:
+	$(MAKE) -f CMakeFiles/list8.dir/build.make CMakeFiles/list8.dir/build
+.PHONY : list8/fast
+
+#=============================================================================
+# Target rules for targets named server
+
+# Build rule for target.
+server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 server
+.PHONY : server
+
+# fast build rule for target.
+server/fast:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
 
 Week7/list.o: Week7/list.c.o
 
@@ -230,6 +243,33 @@ Week7/parser.c.s:
 	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week7/parser.c.s
 .PHONY : Week7/parser.c.s
 
+Week8/list.o: Week8/list.c.o
+
+.PHONY : Week8/list.o
+
+# target to build an object file
+Week8/list.c.o:
+	$(MAKE) -f CMakeFiles/list8.dir/build.make CMakeFiles/list8.dir/Week8/list.c.o
+.PHONY : Week8/list.c.o
+
+Week8/list.i: Week8/list.c.i
+
+.PHONY : Week8/list.i
+
+# target to preprocess a source file
+Week8/list.c.i:
+	$(MAKE) -f CMakeFiles/list8.dir/build.make CMakeFiles/list8.dir/Week8/list.c.i
+.PHONY : Week8/list.c.i
+
+Week8/list.s: Week8/list.c.s
+
+.PHONY : Week8/list.s
+
+# target to generate assembly for a file
+Week8/list.c.s:
+	$(MAKE) -f CMakeFiles/list8.dir/build.make CMakeFiles/list8.dir/Week8/list.c.s
+.PHONY : Week8/list.c.s
+
 Week8/server.o: Week8/server.c.o
 
 .PHONY : Week8/server.o
@@ -265,9 +305,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... list"
-	@echo "... server"
-	@echo "... mysh"
 	@echo "... edit_cache"
+	@echo "... mysh"
+	@echo "... list8"
+	@echo "... server"
 	@echo "... Week7/list.o"
 	@echo "... Week7/list.i"
 	@echo "... Week7/list.s"
@@ -277,6 +318,9 @@ help:
 	@echo "... Week7/parser.o"
 	@echo "... Week7/parser.i"
 	@echo "... Week7/parser.s"
+	@echo "... Week8/list.o"
+	@echo "... Week8/list.i"
+	@echo "... Week8/list.s"
 	@echo "... Week8/server.o"
 	@echo "... Week8/server.i"
 	@echo "... Week8/server.s"

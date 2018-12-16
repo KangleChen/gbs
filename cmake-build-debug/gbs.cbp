@@ -69,43 +69,11 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="server">
-				<Option output="/home/swiftfortune/Documents/gbs/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+			<Target title="edit_cache">
 				<Option working_dir="/home/swiftfortune/Documents/gbs/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/swiftfortune/Documents/gbs/Week5"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
+				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 server"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="server/fast">
-				<Option output="/home/swiftfortune/Documents/gbs/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/swiftfortune/Documents/gbs/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/swiftfortune/Documents/gbs/Week5"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 server/fast"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -153,11 +121,85 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="edit_cache">
+			<Target title="list8">
+				<Option output="/home/swiftfortune/Documents/gbs/cmake-build-debug/liblist8.a" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/swiftfortune/Documents/gbs/cmake-build-debug"/>
-				<Option type="4"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/swiftfortune/Documents/gbs/Week5"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 list8"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list8/fast">
+				<Option output="/home/swiftfortune/Documents/gbs/cmake-build-debug/liblist8.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/swiftfortune/Documents/gbs/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/swiftfortune/Documents/gbs/Week5"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 list8/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="server">
+				<Option output="/home/swiftfortune/Documents/gbs/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/swiftfortune/Documents/gbs/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/swiftfortune/Documents/gbs/Week5"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 server"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="server/fast">
+				<Option output="/home/swiftfortune/Documents/gbs/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/swiftfortune/Documents/gbs/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/swiftfortune/Documents/gbs/Week5"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 server/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/swiftfortune/Documents/gbs/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -175,6 +217,12 @@
 		</Unit>
 		<Unit filename="/home/swiftfortune/Documents/gbs/Week7/parser.c">
 			<Option target="list"/>
+		</Unit>
+		<Unit filename="/home/swiftfortune/Documents/gbs/Week8/list.c">
+			<Option target="list8"/>
+		</Unit>
+		<Unit filename="/home/swiftfortune/Documents/gbs/Week8/list.h">
+			<Option target="list8"/>
 		</Unit>
 		<Unit filename="/home/swiftfortune/Documents/gbs/Week8/server.c">
 			<Option target="server"/>
