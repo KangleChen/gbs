@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/list.dir/Week7/list.c.o"
-  "CMakeFiles/list.dir/Week7/parser.c.o"
+  "CMakeFiles/list.dir/Week7/list.c.obj"
+  "CMakeFiles/list.dir/Week7/parser.c.obj"
   "liblist.pdb"
   "liblist.a"
 )

@@ -1,2 +1,2 @@
-/usr/bin/ar qc liblist.a  CMakeFiles/list.dir/Week7/list.c.o CMakeFiles/list.dir/Week7/parser.c.o
-/usr/bin/ranlib liblist.a
+C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\ar.exe qc liblist.a  CMakeFiles/list.dir/Week7/list.c.obj CMakeFiles/list.dir/Week7/parser.c.obj
+C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\ranlib.exe liblist.a

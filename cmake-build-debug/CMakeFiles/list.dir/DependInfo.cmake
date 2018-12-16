@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/swiftfortune/Documents/gbs/Week7/list.c" "/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list.dir/Week7/list.c.o"
-  "/home/swiftfortune/Documents/gbs/Week7/parser.c" "/home/swiftfortune/Documents/gbs/cmake-build-debug/CMakeFiles/list.dir/Week7/parser.c.o"
+  "C:/Users/modac/OneDrive/Dokumente/OneDriveSync/Studium/3. Semester/Grundlagen Betriebssysteme und Systemsoftware/CLionProj/Week7/list.c" "C:/Users/modac/OneDrive/Dokumente/OneDriveSync/Studium/3. Semester/Grundlagen Betriebssysteme und Systemsoftware/CLionProj/cmake-build-debug/CMakeFiles/list.dir/Week7/list.c.obj"
+  "C:/Users/modac/OneDrive/Dokumente/OneDriveSync/Studium/3. Semester/Grundlagen Betriebssysteme und Systemsoftware/CLionProj/Week7/parser.c" "C:/Users/modac/OneDrive/Dokumente/OneDriveSync/Studium/3. Semester/Grundlagen Betriebssysteme und Systemsoftware/CLionProj/cmake-build-debug/CMakeFiles/list.dir/Week7/parser.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

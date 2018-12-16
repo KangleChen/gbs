@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="89cce9c7-edca-4c68-a4bf-ec7f14a8f35a" name="LocalGbsVm" url="http://localhost">
+        <fileTransfer host="localhost" port="22222" rootFolder="/home/student" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22222" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
