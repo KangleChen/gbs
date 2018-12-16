@@ -243,6 +243,33 @@ Week7/parser.c.s:
 	$(MAKE) -f CMakeFiles/list.dir/build.make CMakeFiles/list.dir/Week7/parser.c.s
 .PHONY : Week7/parser.c.s
 
+Week8/hexdump.o: Week8/hexdump.c.o
+
+.PHONY : Week8/hexdump.o
+
+# target to build an object file
+Week8/hexdump.c.o:
+	$(MAKE) -f CMakeFiles/list8.dir/build.make CMakeFiles/list8.dir/Week8/hexdump.c.o
+.PHONY : Week8/hexdump.c.o
+
+Week8/hexdump.i: Week8/hexdump.c.i
+
+.PHONY : Week8/hexdump.i
+
+# target to preprocess a source file
+Week8/hexdump.c.i:
+	$(MAKE) -f CMakeFiles/list8.dir/build.make CMakeFiles/list8.dir/Week8/hexdump.c.i
+.PHONY : Week8/hexdump.c.i
+
+Week8/hexdump.s: Week8/hexdump.c.s
+
+.PHONY : Week8/hexdump.s
+
+# target to generate assembly for a file
+Week8/hexdump.c.s:
+	$(MAKE) -f CMakeFiles/list8.dir/build.make CMakeFiles/list8.dir/Week8/hexdump.c.s
+.PHONY : Week8/hexdump.c.s
+
 Week8/list.o: Week8/list.c.o
 
 .PHONY : Week8/list.o
@@ -318,6 +345,9 @@ help:
 	@echo "... Week7/parser.o"
 	@echo "... Week7/parser.i"
 	@echo "... Week7/parser.s"
+	@echo "... Week8/hexdump.o"
+	@echo "... Week8/hexdump.i"
+	@echo "... Week8/hexdump.s"
 	@echo "... Week8/list.o"
 	@echo "... Week8/list.i"
 	@echo "... Week8/list.s"

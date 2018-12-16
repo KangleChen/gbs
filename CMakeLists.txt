@@ -9,7 +9,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 #so that it will get built
 add_library(list Week7/list.c Week7/parser.c)
-add_library(list8 Week8/list.c)
+add_library(list8 Week8/list.c Week8/hexdump.c)
 
 #so that it will get linked
 add_executable(mysh

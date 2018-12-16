@@ -218,6 +218,9 @@
 		<Unit filename="/home/swiftfortune/Documents/gbs/Week7/parser.c">
 			<Option target="list"/>
 		</Unit>
+		<Unit filename="/home/swiftfortune/Documents/gbs/Week8/hexdump.c">
+			<Option target="list8"/>
+		</Unit>
 		<Unit filename="/home/swiftfortune/Documents/gbs/Week8/list.c">
 			<Option target="list8"/>
 		</Unit>
