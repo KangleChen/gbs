@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/socket.h>
 
 void hexdump(int sd, char *buffer, int length) {
     char hex[50];
@@ -17,7 +18,7 @@ void hexdump(int sd, char *buffer, int length) {
         if ((i + 1) % 16 == 0 || i + 1 == length) {
             char *mString = malloc(1024);
             sprintf(mString, "%06X : %-48s  %s\n", i - ((i) % 16), hex, str);
-            write(sd, mString, strlen(mString));
+            send(sd, mString, strlen(mString), MSG_DONTWAIT);
             hex[0] = '\0';
             str[0] = '\0';
         }

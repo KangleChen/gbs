@@ -13,9 +13,10 @@
 #define MYPORT 44445
 #define MYPORT_HEXDUMP 44446
 #define MAX_CLIENT 10
-#define TIMEOUT_IDLE 60000 //in millisec
+#define TIMEOUT_IDLE 10000 //in millisec
+#define TIMEOUT_IDLE6 10000
 #define READ_BUFFER_SIZE 1024
-#define CLIENT_TIMEOUT 30000 //in millisec
+#define CLIENT_TIMEOUT 4500 //in millisec
 
 extern void hexdump(int sd, char *buffer, int length);
 
@@ -89,7 +90,7 @@ int main(int argc, char *argv[]) {
 
     struct connection *listenTimeout6 = calloc(1, sizeof(struct connection));
     listenTimeout6->sd = listensd6;
-    listenTimeout6->timeout = TIMEOUT_IDLE;
+    listenTimeout6->timeout = TIMEOUT_IDLE6;
     list_append(timeoutList, listenTimeout6);
 
     struct sockaddr_in sa;
@@ -257,7 +258,7 @@ int main(int argc, char *argv[]) {
                 }
                 list_elem *timeoutListen = list_find(timeoutList, listenTimeout6, connection_equality);
                 ((struct connection *) (timeoutListen->data))->
-                        timeout = TIMEOUT_IDLE;
+                        timeout = TIMEOUT_IDLE6;
             }
             //check for data
             for (int i = 2; i < MAX_CLIENT + 1; i++) {
