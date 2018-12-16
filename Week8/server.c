@@ -7,13 +7,14 @@
 #include <poll.h>
 #include <time.h>
 #include <sys/time.h>
+#include <stdlib.h>
 #include "list.h"
 
 #define MYPORT 44445
 #define MAX_CLIENT 10
 #define TIMEOUT_IDLE 10000 //in millisec
 #define READ_BUFFER_SIZE 1024
-#define CLIENT_TIMEOUT 5000 //in millisec
+#define CLIENT_TIMEOUT 4500 //in millisec
 
 struct connection {
     int sd;
@@ -52,10 +53,10 @@ int main(int argc, char *argv[]) {
     if (setsockopt(listensd, SOL_SOCKET, SO_REUSEADDR, &(int) {1}, sizeof(int)) < 0)
         perror("setsockopt(SO_REUSEADDR) failed");
 
-    struct connection listenTimeout;
-    listenTimeout.sd = listensd;
-    listenTimeout.timeout = TIMEOUT_IDLE;
-    list_append(timeoutList, &listenTimeout);
+    struct connection *listenTimeout = calloc(1, sizeof(struct connection));
+    listenTimeout->sd = listensd;
+    listenTimeout->timeout = TIMEOUT_IDLE;
+    list_append(timeoutList, listenTimeout);
 
     struct sockaddr_in sa;
 
@@ -125,7 +126,7 @@ int main(int argc, char *argv[]) {
             }
 
             //reset timeout for the listensd, because server has new activity
-            list_elem *timeoutListen = list_find(timeoutList, &listenTimeout, connection_equality);
+            list_elem *timeoutListen = list_find(timeoutList, listenTimeout, connection_equality);
             ((struct connection *) (timeoutListen->data))->timeout = TIMEOUT_IDLE;
 
             if (myPoll[0].revents & POLLIN){
@@ -143,10 +144,10 @@ int main(int argc, char *argv[]) {
                 if (i==MAX_CLIENT+1){
                     printf("Connection missed: Too many clients");
                 } else {
-                    struct connection newTimeout;
-                    newTimeout.sd = sd;
-                    newTimeout.timeout = CLIENT_TIMEOUT;
-                    list_append(timeoutList, &newTimeout);
+                    struct connection *newTimeout = calloc(1, sizeof(struct connection));
+                    newTimeout->sd = sd;
+                    newTimeout->timeout = CLIENT_TIMEOUT;
+                    list_append(timeoutList, newTimeout);
                 }
             }
             //check for data
