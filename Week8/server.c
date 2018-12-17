@@ -14,9 +14,9 @@
 #define MYPORT_HEXDUMP 44446
 #define MAX_CLIENT 10
 #define TIMEOUT_IDLE 10000 //in millisec
-#define TIMEOUT_IDLE6 10000
+#define TIMEOUT_IDLE6 50000
 #define READ_BUFFER_SIZE 1024
-#define CLIENT_TIMEOUT 4500 //in millisec
+#define CLIENT_TIMEOUT 5000 //in millisec
 
 extern void hexdump(int sd, char *buffer, int length);
 
@@ -148,6 +148,10 @@ int main(int argc, char *argv[]) {
                 }
                 //remove the server from my poll
                 myPoll[0].fd = -1;
+                //remove all sd markers belong to this server
+                for (int i = 0; i < 10; i++) {
+                    socketFrom45[i] = -1;
+                }
             } else if (nextWait->sd == listensd6) {
                 printf("Timed out after 10 secs");
                 close(listensd6);
@@ -160,6 +164,10 @@ int main(int argc, char *argv[]) {
                 }
                 //remove the server from my poll
                 myPoll[1].fd = -1;
+                //remove all sd markers belong to this server
+                for (int i = 0; i < 10; i++) {
+                    socketFrom46[i] = -1;
+                }
             } else {
                 //client timeout
                 /* char *serverMess = "You have been closed for inactivity";
@@ -179,6 +187,14 @@ int main(int argc, char *argv[]) {
                         continue;
                     myPoll[i].fd = -1;
                 }
+
+                //remove from socket markers
+                for (int i = 0; i < 10; i++) {
+                    if (socketFrom45[i] == nextWait->sd)
+                        socketFrom45[i] = -1;
+                    if (socketFrom46[i] == nextWait->sd)
+                        socketFrom46[i] = -1;
+                }
                 continue;
             }
         } else if (ready == -1) {
@@ -195,6 +211,9 @@ int main(int argc, char *argv[]) {
                 struct connection *dataAtCurr = (struct connection *) curr->data;
                 dataAtCurr->timeout -= timeElapsedInMilliSec;
             }
+
+            int is45Interacted = 0;
+            int is46Interacted = 0;
             //server am 46
             //reset timeout for the listensd, because server has new activity
             /*list_elem *timeoutListen = list_find(timeoutList, listenTimeout, connection_equality);
@@ -227,9 +246,8 @@ int main(int argc, char *argv[]) {
                             break;
                         }
                     }
-                    list_elem *timeoutListen = list_find(timeoutList, listenTimeout, connection_equality);
-                    ((struct connection *) (timeoutListen->data))->
-                            timeout = TIMEOUT_IDLE;
+                    is45Interacted = 1;
+
                 }
             } else if (myPoll[1].revents & POLLIN) {
                 int sd = accept(listensd6, NULL, NULL); //don't care about the address of sender
@@ -256,9 +274,7 @@ int main(int argc, char *argv[]) {
                         }
                     }
                 }
-                list_elem *timeoutListen = list_find(timeoutList, listenTimeout6, connection_equality);
-                ((struct connection *) (timeoutListen->data))->
-                        timeout = TIMEOUT_IDLE6;
+                is46Interacted = 1;
             }
             //check for data
             for (int i = 2; i < MAX_CLIENT + 1; i++) {
@@ -275,7 +291,7 @@ int main(int argc, char *argv[]) {
                         dataAtCurr->
                                 timeout = CLIENT_TIMEOUT;
                     }
-                    int bytesread = read(sockfd, buffer, READ_BUFFER_SIZE);
+                    int bytesread = recv(sockfd, buffer, READ_BUFFER_SIZE, MSG_DONTWAIT);
                     switch (bytesread) {
                         case -1:
                             perror("Cannot read from socket");
@@ -283,21 +299,38 @@ int main(int argc, char *argv[]) {
                         case 0:
                             //connection closed by client
                             close(sockfd);
-                            myPoll[i].
-                                    fd = -1;
+                            myPoll[i].fd = -1;
+                            for (int i = 0; i < 10; i++) {
+                                if (socketFrom45[i] == sockfd)
+                                    socketFrom45[i] = -1;
+                                if (socketFrom46[i] == sockfd)
+                                    socketFrom46[i] = -1;
+                            }
                             break;
                         default:
                             if (isInArray(socketFrom45, 10, sockfd)) {
+                                is45Interacted = 1;
                                 if (write(sockfd, buffer, bytesread) <= 0) {
                                     perror("Error while writing");
                                     return -1;
                                 }
                             } else if (isInArray(socketFrom46, 10, sockfd)) {
+                                is46Interacted = 1;
                                 hexdump(sockfd, buffer, bytesread);
                             }
 
                     }
                 }
+            }
+            if (is45Interacted) {
+                list_elem *timeoutListen = list_find(timeoutList, listenTimeout, connection_equality);
+                ((struct connection *) (timeoutListen->data))->
+                        timeout = TIMEOUT_IDLE;
+            }
+            if (is46Interacted) {
+                list_elem *timeoutListen = list_find(timeoutList, listenTimeout6, connection_equality);
+                ((struct connection *) (timeoutListen->data))->
+                        timeout = TIMEOUT_IDLE;
             }
         }
     }
