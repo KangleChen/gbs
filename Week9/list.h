@@ -1,7 +1,14 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "memalloc.h"
+struct memblock {
+    enum {
+        FREE, USED
+    } status;
+    char *addr;
+    unsigned int size;
+    unsigned int in_use;
+};
 
 struct list_elem {
     struct list_elem *next;  // Zeiger auf das naechste Element
@@ -29,7 +36,7 @@ void list_finit(list_t *list);
 
 void list_removeAll(list_t *list);
 
-void list_print(list_t *list, void (*print_elem)(char *));
+void list_print(list_t *list, void (*print_elem)(memblock *));
 
 struct list_elem *list_find(list_t *list, memblock *data,
                             int (*cmp_elem)(const memblock *, const memblock *));

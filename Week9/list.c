@@ -87,7 +87,7 @@ struct list_elem *list_find(list_t *list, memblock *data, int (*cmp_elem)(const 
     return current_list_elem;
 }
 
-void list_print(list_t *list, void (*print_elem)(char *)) {
+void list_print(list_t *list, void (*print_elem)(memblock *)) {
     struct list_elem *curr = list->first;
     for (int i = 1; curr != NULL; i++) {
         printf("%d:", i);
