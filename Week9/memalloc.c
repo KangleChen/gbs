@@ -225,5 +225,6 @@ void print_memblock(memblock *block) {
 
 void mem_dump() {
     list_print(myMemory, print_memblock);
+    printf("\n");
 }
 
