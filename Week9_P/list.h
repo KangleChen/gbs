@@ -1,11 +1,9 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "memory.h"
-
 struct list_elem {
     struct list_elem *next;  // Zeiger auf das naechste Element
-    memblock_t *data;              // Zeiger auf ein Datenobject
+    void *data;              // Zeiger auf ein Datenobject
 };
 typedef struct list_elem list_elem;
 
@@ -18,9 +16,11 @@ typedef struct list {
 /* function prototypes */
 list_t *list_init();
 
-struct list_elem *list_insert(list_t *list, memblock_t *data);
+struct list_elem *list_insert_after(list_t *list, struct list_elem *elem, void *data);
 
-struct list_elem *list_append(list_t *list, memblock_t *data);
+struct list_elem *list_insert(list_t *list, void *data);
+
+struct list_elem *list_append(list_t *list, void *data);
 
 int list_remove(list_t *list, struct list_elem *elem);
 
@@ -28,16 +28,16 @@ void list_finit(list_t *list);
 
 void list_removeAll(list_t *list);
 
-void list_print(list_t *list, void (*print_elem)(char *));
+void list_print(list_t *list, void (*print_elem)(void *));
 
 struct list_elem *list_find(list_t *list, void *data,
-                            int (*cmp_elem)(const memblock_t *, const memblock_t *));
+                            int (*cmp_elem)(const void *, const void *));
 
 char *list_toString(list_t *list);
 
 int list_length(list_t *list);
 
-void list_to_array(list_t* list, memblock_t *dataArray[]);
+void list_to_array(list_t* list, void *dataArray[]);
 
 int list_updateCount(list_t *list);
 

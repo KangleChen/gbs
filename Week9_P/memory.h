@@ -13,7 +13,7 @@ enum mem_algo mem_strategy;
 
 typedef struct memblock {
     enum {
-        FREE, USED
+        FREE='F', USED='P'
     } status;
     char *addr;
     unsigned int size;
