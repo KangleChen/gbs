@@ -4,9 +4,11 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-#include <sys/types.h>
 #include <fcntl.h>
 #include "list.h"
+#include <errno.h>
+
+char *currentFolder;
 
 extern list_t *myParse(list_t *res, char *str, char *envp[]);
 
@@ -42,11 +44,27 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
 
     myParseStg2(cmdList, outFileP, inFileP);
 
+    int numberArguments = list_length(cmdList);
+    char *argv[list_length(cmdList) + 1];
+    list_to_array(cmdList, (void **) argv);
+    argv[list_length(cmdList)] = NULL;
+    list_finit(cmdList);
+    if (strcmp(argv[0], "cd") == 0 && numberArguments == 0 || strcmp(argv[0], "pwd") == 0) {
+        printf("%s\n", currentFolder);
+        return 0;
+    } else if (strcmp(argv[0], "cd") == 0 && numberArguments > 2) {
+        printf("Usage: cd <dir>\n");
+        return 0;
+    } else if (strcmp(argv[0], "cd") == 0 && numberArguments == 2) {
+        int returnCode = chdir(argv[1]);
+        if (returnCode != 0) {
+            printf("cd: %s: %s\n", argv[1], strerror(errno));
+        }
+        getcwd(currentFolder, 1024);
+        return 0;
+    }
+
     if ((cpid = fork()) == 0) {
-        char *argv[list_length(cmdList) + 1];
-        list_to_array(cmdList, (void **) argv);
-        argv[list_length(cmdList)] = NULL;
-        list_finit(cmdList);
 
         char delimiter[] = ":";
         char *ptr;
@@ -89,6 +107,7 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
 
             while (ptr != NULL) {
                 char cmd[strlen(ptr) + strlen(argv[0]) + 2];
+                //ls  path=/usr/bin , ls /usr/bin/ls
                 sprintf(cmd, "%s/%s", ptr, argv[0]);
 
                 execve(cmd, argv, envp);
@@ -110,6 +129,8 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
 }
 
 int main(int argc, char *argv[], char *envp[]) {
+    currentFolder = malloc(1024);
+    getcwd(currentFolder, 1024);
 
     char str[1024];
 
@@ -117,7 +138,7 @@ int main(int argc, char *argv[], char *envp[]) {
     list_t *cL = list_init();
     list_t *paras = list_init();
 
-    printf("$ ");
+    printf("%s $", currentFolder);
     fflush(stdout);
     while (fgets(str, 1024, stdin) != NULL) {
         if (paras != NULL) {
@@ -146,7 +167,7 @@ int main(int argc, char *argv[], char *envp[]) {
             list_remove(tL, list_find(tL, &cpid, intPcmp));
         }
 
-        fprintf(stdout, "$ ");
+        printf("%s $", currentFolder);
         fflush(stdout);
     }
 }
