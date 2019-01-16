@@ -1,4 +1,3 @@
-cmake_minimum_required(VERSION 3.12)
 project(gbs C)
 
 set(CMAKE_C_STANDARD 11)
@@ -22,7 +21,10 @@ target_link_libraries(server list8)
 add_executable(mem Week9/mem.c)
 add_library(lib_week9 Week9/list.c Week9/memalloc.c)
 target_link_libraries(mem lib_week9 m)
-
+#Week10
 #Week11
 
+add_executable(week11 Week11_J/mysh.c)
+add_library(lib_week11 Week11_J/list.c Week11_J/parser.c)
+target_link_libraries(week11 lib_week11)
 
