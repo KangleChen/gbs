@@ -6,7 +6,22 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#include <time.h>
+#include <limits.h>
+#include <errno.h>
+#include <dirent.h>
 #include "list.h"
+#include "wildcard.h"
+
+char internalPrefixFormat[] = "/>%06d#internal</";
+// snprintf(NULL, 0, internalPrefixFormat, 0) + 1
+char internalPrefix[20];
+
+char *pwd;
+
+list_t *tL;
+list_t *cL;
+list_t *paras;
 
 // parser.c function declarations
 extern list_t *myParse(list_t *res, char *str, char *envp[]);
@@ -21,10 +36,61 @@ int intPcmp(const void *intP1, const void *intP2) {
     return (*(int *) intP1) - (*(int *) intP2);
 }
 
+void cleanExit(int status) {
+    list_finit(tL);
+    list_finit(cL);
+    list_finit(paras);
+    free(pwd);
+    exit(status);
+}
+
+int changeDir(list_t *cmdList) {
+    int argc = list_length(cmdList);
+    if (argc == 1) {
+        printf("%s\n", pwd);
+    } else if (argc == 2) {
+        char *dir = (char *)cmdList->first->next->data;
+        char newPwd[strlen(pwd) + strlen(dir) + 2];
+        sprintf(newPwd, "%s/%s", pwd, dir);
+        char realNewPwd[4096];
+        realpath(newPwd, realNewPwd);
+        //printf("RealNewPwd: %s\n", realNewPwd);
+        struct stat s;
+        int err = stat(newPwd, &s);
+        if (err != -1 && S_ISDIR(s.st_mode)) {
+            strcpy(pwd, realNewPwd);
+            //printf("pwd: %s\n", pwd);
+            setenv("PWD", pwd, 1);
+            chdir(pwd);
+        } else {
+            printf("cd: %s: %s\n", dir, strerror(ENOENT));
+        }
+    } else {
+        printf("Usage: cd <dir>\n");
+    }
+    return 0;
+}
+
+int execCmd(const char *filename, char *const argv[], char *const envp[]) {
+    /*
+    if (strncmp(filename, internalPrefix, strlen(internalPrefix)) == 0) {
+        if (strncmp(filename + strlen(internalPrefix), "/cd", 3) == 0) {
+            return changeDir(argv, envp);
+        }
+    }
+    */
+    return execve(filename, argv, envp);
+}
+
+
 int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL) {
     char **outFileP = malloc(sizeof(char *));
     char **inFileP = malloc(sizeof(char *));
     int cpid;
+
+    if(list_length(cmdList) > 0 && strncmp((char *)cmdList->first->data, "cd", 2) == 0){
+        return changeDir(cmdList);
+    }
 
     list_t *args2 = list_init();
 
@@ -56,8 +122,13 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
         char *string = getenv("PATH");
         if (string == NULL) {
             fprintf(stderr, "No PATH variable");
-            exit(-1);
+            cleanExit(-1);
         }
+
+        /*
+        char string[strlen(internalPrefix) + strlen(path) + 2];
+        sprintf(string, "%s:%s", internalPrefix, path);
+        */
 
         if (pipeA2[1] > 0) {
             dup2(pipeA2[1], STDOUT_FILENO);
@@ -68,7 +139,7 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
 
         while (cL->first != NULL) {
             struct list_elem *cC = cL->first;
-            close(*((int*)cC->data));
+            close(*((int *) cC->data));
             free(cC->data);
             list_remove(cL, cC);
         }
@@ -85,7 +156,7 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
         }
 
         if (strchr(argv[0], '/') != NULL) {
-            execve(argv[0], argv, envp);
+            execCmd(argv[0], argv, envp);
         } else {
 
             ptr = strtok(string, delimiter);
@@ -94,14 +165,14 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
                 char cmd[strlen(ptr) + strlen(argv[0]) + 2];
                 sprintf(cmd, "%s/%s", ptr, argv[0]);
 
-                execve(cmd, argv, envp);
+                execCmd(cmd, argv, envp);
 
                 // naechsten Abschnitt erstellen
                 ptr = strtok(NULL, delimiter);
             }
 
             fprintf(stderr, "Command '%s' not found\n", argv[0]);
-            exit(-1);
+            cleanExit(-1);
         }
     } else {
         int *cpidP = malloc(sizeof(int));
@@ -114,42 +185,51 @@ int processCmd(list_t *tL, list_t *cmdList, char *envp[], int inPipe, list_t *cL
 
 int main(int argc, char *argv[], char *envp[]) {
 
+    srand(time(NULL));
+    sprintf(internalPrefix, internalPrefixFormat, rand() % 900000 + 100000);
+
     char str[1024];
 
-    list_t *tL = list_init();
-    list_t *cL = list_init();
-    list_t *paras = list_init();
+    tL = list_init();
+    cL = list_init();
+    paras = list_init();
 
-    printf("$ ");
+    pwd = calloc(4096, sizeof(char));
+    //printf("pwd size: %d\n", (int) (sizeof(pwd) / sizeof(pwd[0])));
+    if (getcwd(pwd, 4096) == NULL) {
+        sprintf(pwd, "/");
+    }
+
+    printf("%s $ ", pwd);
     fflush(stdout);
     while (fgets(str, 1024, stdin) != NULL) {
         if (paras != NULL) {
             myParse(paras, str, envp);
         }
         if (strcmp(str, "exit\n") == 0) {
-            list_finit(tL);
-            list_finit(cL);
-            exit(0);
+            cleanExit(0);
         }
+
+        expandWildcards(paras);
 
         processCmd(tL, paras, envp, -1, cL);
 
 
         while (cL->first != NULL) {
             struct list_elem *cC = cL->first;
-            close(*((int*)cC->data));
+            close(*((int *) cC->data));
             free(cC->data);
             list_remove(cL, cC);
         }
 
 
-            int cpid;
+        int cpid;
         while (tL->first != NULL) {
             cpid = wait(NULL);
             list_remove(tL, list_find(tL, &cpid, intPcmp));
         }
 
-        fprintf(stdout, "$ ");
+        fprintf(stdout, "%s $ ", pwd);
         fflush(stdout);
     }
 }

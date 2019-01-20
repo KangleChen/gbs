@@ -1,0 +1,13 @@
+blatt07.pdf
+list.c
+list.h
+Makefile
+mysh
+mysh.c
+mysh_tester.py
+mysh_tester.pyc
+mysh_tester.pyc1
+parser.c
+pipetest
+pipetest.c
+test.txt

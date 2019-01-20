@@ -1,0 +1,147 @@
+gcc -g -Wall memory.c list.c mem.c -o mem
+In file included from list.h:4:0,
+                 from memory.c:4:
+memory.h:23:1: error: unknown type name ‘list_t’
+ list_t *memoryList;
+ ^~~~~~
+memory.c: In function ‘mem_init’:
+memory.c:12:16: warning: assignment from incompatible pointer type [-Wincompatible-pointer-types]
+     memoryList = list_init();
+                ^
+memory.c:16:21: warning: assignment from incompatible pointer type [-Wincompatible-pointer-types]
+     initBlock->addr = initBlock;
+                     ^
+memory.c:20:17: warning: passing argument 1 of ‘list_append’ from incompatible pointer type [-Wincompatible-pointer-types]
+     list_append(memoryList, initBlock);
+                 ^~~~~~~~~~
+In file included from memory.c:4:0:
+list.h:25:19: note: expected ‘list_t * {aka struct list *}’ but argument is of type ‘int *’
+ struct list_elem *list_append(list_t *list, void *data);
+                   ^~~~~~~~~~~
+memory.c: In function ‘getFreeBlockElemFirstFit’:
+memory.c:25:54: error: request for member ‘first’ in something not a structure or union
+     struct list_elem *prev = NULL, *curr = memoryList->first;
+                                                      ^~
+memory.c:28:9: error: expected ‘,’ or ‘;’ before ‘if’
+         if (currData->status == FREE && currData->size >= size) {
+         ^~
+memory.c:27:21: warning: unused variable ‘currData’ [-Wunused-variable]
+         memblock_t *currData = (memblock_t *)curr->data
+                     ^~~~~~~~
+memory.c: In function ‘getFreeBlockElemWorstFit’:
+memory.c:43:59: error: request for member ‘first’ in something not a structure or union
+     for (struct list_elem *prev = NULL, *curr = memoryList->first; curr; prev = curr, curr = curr->next) {
+                                                           ^~
+memory.c: In function ‘mem_alloc’:
+memory.c:82:5: error: expected ‘,’ or ‘;’ before ‘int’
+     int ret = getFreeBlockElem(size, blockPP);
+     ^~~
+memory.c:83:32: warning: initialization from incompatible pointer type [-Wincompatible-pointer-types]
+     struct list_elem *blockP = &blockPP;
+                                ^
+memory.c:86:9: error: ‘ret’ undeclared (first use in this function)
+     if (ret <= 0) return;
+         ^~~
+memory.c:86:9: note: each undeclared identifier is reported only once for each function it appears in
+memory.c:86:19: warning: ‘return’ with no value, in function returning non-void
+     if (ret <= 0) return;
+                   ^~~~~~
+memory.c:80:7: note: declared here
+ void *mem_alloc(unsigned int size) {
+       ^~~~~~~~~
+memory.c:97:9: warning: ‘return’ with no value, in function returning non-void
+         return;
+         ^~~~~~
+memory.c:80:7: note: declared here
+ void *mem_alloc(unsigned int size) {
+       ^~~~~~~~~
+memory.c:108:56: warning: passing argument 1 of ‘list_insert_after’ from incompatible pointer type [-Wincompatible-pointer-types]
+     struct list_elem *newBlockElem = list_insert_after(memoryList, prevBlock, newBlock);
+                                                        ^~~~~~~~~~
+In file included from memory.c:4:0:
+list.h:21:19: note: expected ‘list_t * {aka struct list *}’ but argument is of type ‘int *’
+ struct list_elem *list_insert_after(list_t *list, struct list_elem *elem, void *data);
+                   ^~~~~~~~~~~~~~~~~
+memory.c:120:27: warning: passing argument 1 of ‘list_insert_after’ from incompatible pointer type [-Wincompatible-pointer-types]
+         list_insert_after(memoryList, newBlockElem, newFreeBlock);
+                           ^~~~~~~~~~
+In file included from memory.c:4:0:
+list.h:21:19: note: expected ‘list_t * {aka struct list *}’ but argument is of type ‘int *’
+ struct list_elem *list_insert_after(list_t *list, struct list_elem *elem, void *data);
+                   ^~~~~~~~~~~~~~~~~
+memory.c: In function ‘mem_free’:
+memory.c:127:17: error: ‘list’ undeclared (first use in this function)
+     for (curr = list->first; curr; prev = curr, curr = curr->next) {
+                 ^~~~
+memory.c:128:46: error: invalid operands to binary - (have ‘char *’ and ‘void *’)
+         if (((memblock_t *)curr->data)->addr - addr == 0) {
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^
+memory.c:142:21: warning: passing argument 1 of ‘list_remove’ from incompatible pointer type [-Wincompatible-pointer-types]
+         list_remove(memoryList, curr);
+                     ^~~~~~~~~~
+In file included from memory.c:4:0:
+list.h:27:5: note: expected ‘list_t * {aka struct list *}’ but argument is of type ‘int *’
+ int list_remove(list_t *list, struct list_elem *elem);
+     ^~~~~~~~~~~
+memory.c:151:21: warning: passing argument 1 of ‘list_remove’ from incompatible pointer type [-Wincompatible-pointer-types]
+         list_remove(memoryList, curr->next);
+                     ^~~~~~~~~~
+In file included from memory.c:4:0:
+list.h:27:5: note: expected ‘list_t * {aka struct list *}’ but argument is of type ‘int *’
+ int list_remove(list_t *list, struct list_elem *elem);
+     ^~~~~~~~~~~
+memory.c: In function ‘dump_block’:
+memory.c:158:35: warning: dereferencing ‘void *’ pointer
+     printf("[%p %c %d/%d] ", block->addr, block->status, block->in_use, block->size);
+                                   ^~
+memory.c:158:35: error: request for member ‘addr’ in something not a structure or union
+memory.c:158:48: warning: dereferencing ‘void *’ pointer
+     printf("[%p %c %d/%d] ", block->addr, block->status, block->in_use, block->size);
+                                                ^~
+memory.c:158:48: error: request for member ‘status’ in something not a structure or union
+memory.c:158:63: warning: dereferencing ‘void *’ pointer
+     printf("[%p %c %d/%d] ", block->addr, block->status, block->in_use, block->size);
+                                                               ^~
+memory.c:158:63: error: request for member ‘in_use’ in something not a structure or union
+memory.c:158:78: warning: dereferencing ‘void *’ pointer
+     printf("[%p %c %d/%d] ", block->addr, block->status, block->in_use, block->size);
+                                                                              ^~
+memory.c:158:78: error: request for member ‘size’ in something not a structure or union
+memory.c: In function ‘mem_dump’:
+memory.c:162:16: warning: passing argument 1 of ‘list_print’ from incompatible pointer type [-Wincompatible-pointer-types]
+     list_print(memoryList, dump_block);
+                ^~~~~~~~~~
+In file included from memory.c:4:0:
+list.h:33:6: note: expected ‘list_t * {aka struct list *}’ but argument is of type ‘int *’
+ void list_print(list_t *list, void (*print_elem)(void *));
+      ^~~~~~~~~~
+memory.c: In function ‘mem_alloc’:
+memory.c:123:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+In file included from list.h:4:0,
+                 from list.c:5:
+memory.h:23:1: error: unknown type name ‘list_t’
+ list_t *memoryList;
+ ^~~~~~
+mem.c: In function ‘main’:
+mem.c:33:17: error: a label can only be part of a statement and a declaration is not a statement
+                 struct command *cmdP = malloc(sizeof(struct command));
+                 ^~~~~~
+mem.c:39:17: error: a label can only be part of a statement and a declaration is not a statement
+                 struct command *cmdP = malloc(sizeof(struct command));
+                 ^~~~~~
+mem.c:39:33: error: redefinition of ‘cmdP’
+                 struct command *cmdP = malloc(sizeof(struct command));
+                                 ^~~~
+mem.c:33:33: note: previous definition of ‘cmdP’ was here
+                 struct command *cmdP = malloc(sizeof(struct command));
+                                 ^~~~
+mem.c:53:26: warning: implicit declaration of function ‘isprint’ [-Wimplicit-function-declaration]
+                 else if (isprint(optopt))
+                          ^~~~~~~
+mem.c:80:17: error: a label can only be part of a statement and a declaration is not a statement
+                 struct list_elem *currI = allocList->first;
+                 ^~~~~~
+Makefile:6: recipe for target 'mem' failed
+make: *** [mem] Error 1
