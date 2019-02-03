@@ -26,8 +26,10 @@ void addParam(list_t *params, list_t *buffer) {
     }
 }
 
-// This function takes the name of the env var at varBuffer (stored as list of chars)
-// and add the value of this env var value char by char to the list buffer
+/*
+ * This function takes the name of the env var at varBuffer (stored as list of chars)
+ * and add the value of this env var value char by char to the list buffer
+ */
 void addVar(list_t *buffer, list_t *varBuffer) {
     if (list_length(varBuffer) <= 0) {
         return;
@@ -173,11 +175,13 @@ list_t *myParse(list_t *res, char *str, char *envp[]) {
     return res;
 }
 
-// Gets Input-/Output- redirects and stores the filenames in the Pointers
-// Pointers are NULL if no redirect was found or if an error occured
-// Returns -1 if error occured, 0b01 if Out-red was found, 0b10 if In-red was found,
-// and 0b11 if both redirects were found
-// removes '>', '<' and there argumments from the args list
+/*
+ * Gets Input-/Output- redirects and stores the filenames in the Pointers
+ * Pointers are NULL if no redirect was found or if an error occured
+ * Returns -1 if error occured, 0b01 if Out-red was found, 0b10 if In-red was found,
+ * and 0b11 if both redirects were found
+ * removes '>', '<' and there argumments from the args list
+ */
 int myParseStg2(list_t *args, char **outFileP, char **inFileP) {
     // init
     int retVal = 0;
@@ -263,9 +267,11 @@ int myParseStg2(list_t *args, char **outFileP, char **inFileP) {
     return retVal;
 }
 
-// takes the list of arguments in args and splits it by the first pipe-char it finds.
-// The elements after the pipe get moved to args2 and return a new pipe
-// returns -1 on error, -2 if no pipe was found, pipe() return val on success
+/*
+ * takes the list of arguments in args and splits it by the first pipe-char it finds.
+ * The elements after the pipe get moved to args2 and return a new pipe
+ * returns -1 on error, -2 if no pipe was found, pipe() return val on success
+ */
 int myParsePipe(list_t *args, list_t *args2, int pipeA[]) {
     if (pipeA == NULL || args2 == NULL || args == NULL || args->count <= 0) {
         return -1;
@@ -280,32 +286,33 @@ int myParsePipe(list_t *args, list_t *args2, int pipeA[]) {
     }
 
     // no pipe found
-    if(curr == NULL){
+    if (curr == NULL) {
         return -2;
     }
 
     // clear args2
     list_removeAll(args2);
 
-    // -> access is shorted by . (yes it's technically wrong but looks better ^^)
-    //    ["ls"]       -> ["."] -> ["|"] -> ["rev"]
-    //      /\             /\       /\        /\
-    //   args.first       prev     curr    args.last
-    //
-    //                       ;;;;;
-    //                       ;;;;;
-    //                     ..;;;;;..
-    //                      ':::::'
-    //                        ':`
-    //  --------------------------    ----------------------------
-    //  |          args          |    |              args2       |
-    //
-    //    ["ls"]       -> ["."]                  ["rev"]
-    //      /\             /\                      /\
-    // [args.first]       prev          curr.next-/  \-args.last
-    // [   ||     ]        ||               ||             ||
-    // [args.first]     args.last      args2.first    args2.last
-
+    /*
+     * -> access is shorted by . (yes it's technically wrong but looks better ^^)
+     *    ["ls"]       -> ["."] -> ["|"] -> ["rev"]
+     *      /\             /\       /\        /\
+     *   args.first       prev     curr    args.last
+     *
+     *                       ;;;;;
+     *                       ;;;;;
+     *                     ..;;;;;..
+     *                      ':::::'
+     *                        ':`
+     *  --------------------------    ----------------------------
+     *  |          args          |    |              args2       |
+     *
+     *    ["ls"]       -> ["."]                  ["rev"]
+     *      /\             /\                      /\
+     * [args.first]       prev          curr.next-/  \-args.last
+     * [   ||     ]        ||               ||             ||
+     * [args.first]     args.last      args2.first    args2.last
+     */
 
     args2->last = args->last;
     args2->first = curr->next;
