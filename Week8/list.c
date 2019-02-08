@@ -79,7 +79,7 @@ void list_finit(list_t *list) {
     free(list);
 }
 
-struct list_elem *list_find(list_t *list, void *data, int (*cmp_elem)(void *, void *)) {
+struct list_elem *list_find(list_t *list, void *data, int (*cmp_elem)(const void *, const void *)) {
     struct list_elem *current_list_elem = list->first;
     while (current_list_elem != NULL && (*cmp_elem)(current_list_elem->data, data) != 0) {
         current_list_elem = current_list_elem->next;
@@ -133,16 +133,4 @@ int list_updateCount(list_t *list) {
         curr = curr->next;
     }
     return list->count;
-}
-
-void *list_findmin(list_t *list, int (*comparator)(void *, void *)) {
-    if (list_length(list) == 0)
-        return NULL;
-    void *ret = list->first->data;
-    for (list_elem *curr = list->first; curr; curr = curr->next) {
-        if (comparator(curr->data, ret) >= 0)
-            continue;
-        ret = curr->data;
-    }
-    return ret;
 }

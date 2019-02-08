@@ -1,9 +1,9 @@
 all: mem
 
-SOURCE=list.c list.h memalloc.c memalloc.h mem.c
+SOURCE=list.c list.h memory.c memory.h mem.c
 
 mem: $(SOURCE)
-	gcc -g -Wall memalloc.c list.c mem.c -o $@
+	gcc -g -Wall memory.c list.c mem.c -o $@
 
 submit: $(SOURCE)
 	tar czvf blatt09.tgz $(SOURCE)

@@ -1,21 +1,11 @@
 #ifndef LIST_H
 #define LIST_H
 
-struct memblock {
-    enum {
-        FREE, USED
-    } status;
-    char *addr;
-    unsigned int size;
-    unsigned int in_use;
-};
-
 struct list_elem {
     struct list_elem *next;  // Zeiger auf das naechste Element
-    struct memblock  *data;              // Zeiger auf ein Datenobject
+    void *data;              // Zeiger auf ein Datenobject
 };
 typedef struct list_elem list_elem;
-typedef struct memblock memblock;
 
 typedef struct list {
     unsigned int count;
@@ -26,26 +16,28 @@ typedef struct list {
 /* function prototypes */
 list_t *list_init();
 
-struct list_elem *list_insert(list_t *list,  memblock *data);
+struct list_elem *list_insert_after(list_t *list, struct list_elem *elem, void *data);
 
-struct list_elem *list_append(list_t *list, memblock *data);
+struct list_elem *list_insert(list_t *list, void *data);
 
-int list_remove(list_t *list, list_elem *elem);
+struct list_elem *list_append(list_t *list, void *data);
+
+int list_remove(list_t *list, struct list_elem *elem);
 
 void list_finit(list_t *list);
 
 void list_removeAll(list_t *list);
 
-void list_print(list_t *list, void (*print_elem)(memblock *));
+void list_print(list_t *list, void (*print_elem)(void *));
 
-struct list_elem *list_find(list_t *list, memblock *data,
-                            int (*cmp_elem)(const memblock *, const memblock *));
+struct list_elem *list_find(list_t *list, void *data,
+                            int (*cmp_elem)(const void *, const void *));
 
 char *list_toString(list_t *list);
 
 int list_length(list_t *list);
 
-void list_to_array(list_t* list, memblock *dataArray[]);
+void list_to_array(list_t* list, void *dataArray[]);
 
 int list_updateCount(list_t *list);
 

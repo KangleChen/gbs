@@ -1,5 +1,0 @@
-Blatt01
-Blatt02
-files.txt
-Test01
-Week7

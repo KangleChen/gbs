@@ -11,7 +11,26 @@ list_t *list_init() {
     return list;
 }
 
-struct list_elem *list_insert(list_t *list, memblock *data) {
+struct list_elem *list_insert_after(list_t *list, struct list_elem *elem, void *data) {
+    if(elem == NULL){
+        return list_insert(list, data);
+    }
+    struct list_elem *list_elem1 = malloc(sizeof(struct list_elem));
+    if (list_elem1 == NULL) {
+        return NULL;
+    }
+
+    list_elem1->next = elem->next;
+    list_elem1->data = data;
+    elem->next = list_elem1;
+    if (list_elem1->next == NULL) {
+        list->last = list_elem1;
+    }
+    ++list->count;
+    return list_elem1;
+}
+
+struct list_elem *list_insert(list_t *list, void *data) {
     struct list_elem *list_elem1 = malloc(sizeof(struct list_elem));
     if (list_elem1 == NULL) {
         return NULL;
@@ -27,7 +46,7 @@ struct list_elem *list_insert(list_t *list, memblock *data) {
     return list_elem1;
 }
 
-struct list_elem *list_append(list_t *list, memblock *data) {
+struct list_elem *list_append(list_t *list, void *data) {
     struct list_elem *list_elem1 = malloc(sizeof(struct list_elem));
     if (list_elem1 == NULL) {
         return NULL;
@@ -79,7 +98,7 @@ void list_finit(list_t *list) {
     free(list);
 }
 
-struct list_elem *list_find(list_t *list, memblock *data, int (*cmp_elem)(const memblock *, const memblock *)) {
+struct list_elem *list_find(list_t *list, void *data, int (*cmp_elem)(const void *, const void *)) {
     struct list_elem *current_list_elem = list->first;
     while (current_list_elem != NULL && (*cmp_elem)(current_list_elem->data, data) != 0) {
         current_list_elem = current_list_elem->next;
@@ -87,7 +106,7 @@ struct list_elem *list_find(list_t *list, memblock *data, int (*cmp_elem)(const 
     return current_list_elem;
 }
 
-void list_print(list_t *list, void (*print_elem)(memblock *)) {
+void list_print(list_t *list, void (*print_elem)(void *)) {
     struct list_elem *curr = list->first;
     for (int i = 1; curr != NULL; i++) {
         printf("%d:", i);
@@ -117,7 +136,7 @@ int list_length(list_t *list) {
     return list == NULL ? -1 : list->count;
 }
 
-void list_to_array(list_t *list, memblock *dataArray[]) {
+void list_to_array(list_t *list, void *dataArray[]) {
     struct list_elem *curr = list->first;
     for (int i = 0; curr != NULL; i++) {
         dataArray[i] = curr->data;
